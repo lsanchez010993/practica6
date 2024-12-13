@@ -1,0 +1,147 @@
+/* Estilo para el banner en la parte superior */
+.banner {
+    width: 100%;
+    background-color: #333;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Alineación del menú a la derecha */
+.menu-right {
+    margin-left: auto;
+    position: relative; /* Necesario para que el menú desplegable se posicione correctamente */
+}
+
+/* Botón principal del menú */
+.menu-toggle {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Contenedor de los elementos del menú (oculto por defecto) */
+.menu-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Coloca el menú justo debajo del botón */
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+/* Botones del menú desplegable */
+.menu-content button {
+    background-color: #f9f9f9;
+    color: black;
+    padding: 10px 16px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.menu-content button:hover {
+    background-color: #ddd;
+}
+
+/* Mostrar el menú cuando el ratón está sobre .menu-right o .menu-content */
+.menu-right:hover .menu-content,
+.menu-content:hover {
+    display: block;
+}
+
+/* Estilos para el submenú */
+.submenu {
+    position: relative;
+}
+
+/* Botón del submenú */
+.submenu-toggle {
+    background-color: #2980b9;
+    color: white;
+    padding: 10px 16px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* Contenedor de los elementos del submenú */
+.submenu-content {
+    display: none;
+    position: absolute;
+    top: 0; /* Alinea el submenú con el botón principal */
+    right: 100%; /* Abre el submenú hacia la izquierda */
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    margin-right: 5px; /* Añade un pequeño margen para separar del botón principal */
+}
+
+/* Mostrar el submenú al pasar el ratón sobre "Administrar" */
+.submenu:hover .submenu-content {
+    display: block;
+}
+
+/* Botones del submenú */
+.submenu-content button {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 10px 16px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.submenu-content button:hover {
+    background-color: #ddd;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    padding-left: 30px;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+.search-bar input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding-left: 30px;
+}
+.search-bar button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    padding-left: 30px;
+}
+.search-bar button:hover {
+    background-color: #0056b3;
+}
