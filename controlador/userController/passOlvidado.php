@@ -2,12 +2,12 @@
 require_once __DIR__ . '/../../modelo/user/userModel.php';
 
 
-require_once __DIR__ . '/../../vendor/phpmailer/src/PHPMailer.php';
+require_once __DIR__ . '/../../vendor/PHPMailer-master/src/PHPMailer.php';
 
 
-require_once __DIR__ . '/../../vendor/phpmailer/src/Exception.php';
+require_once __DIR__ . '/../../vendor/PHPMailer-master/src/Exception.php';
 
-require_once __DIR__ . '/../../vendor/phpmailer/src/SMTP.php';
+require_once __DIR__ . '/../../vendor/PHPMailer-master/src/SMTP.php';
 
 
 
@@ -95,11 +95,10 @@ function verificarYCambiarContrasenya($token, $password, $password_confirm) {
       
         return $resultadoPassword;
     }
-    // var_dump($token);
+
     $usuario = verificarToken($token);
 
-    // var_dump($usuario);
-    // exit();
+
 
     if (!$usuario) {
         return ["El token ha expirado o no es válido."];

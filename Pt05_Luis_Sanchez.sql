@@ -78,7 +78,7 @@ CREATE TABLE usuarios (
 --
 
 INSERT INTO usuarios (id, nombre_usuario, email, password) VALUES
-(1, 'luis', '1234@1234.com', '$2y$10$ouqONxD/UE.YV3twy/yVYudLM/PpdyeWWFDFbZ7sH1n3R/cEPTdhO'),
+(1, 'luis', 'luis010993@gmail.com', '$2y$10$ouqONxD/UE.YV3twy/yVYudLM/PpdyeWWFDFbZ7sH1n3R/cEPTdhO'),
 (7, '1234', '12@12.com', '$2y$10$ouqONxD/UE.YV3twy/yVYudLM/PpdyeWWFDFbZ7sH1n3R/cEPTdhO'),
 (3, 'pepe', '123@123.com', '$2y$10$ouqONxD/UE.YV3twy/yVYudLM/PpdyeWWFDFbZ7sH1n3R/cEPTdhO'),
 (4, 'admin', '1553@admin.com', '$2y$10$ouqONxD/UE.YV3twy/yVYudLM/PpdyeWWFDFbZ7sH1n3R/cEPTdhO'),

@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <base href="./">
+</head>
+
+<body>
+
+</body>
+
+</html>
 <?php
 // require_once 'controlador/errores/errores.php'; 
 require_once __DIR__ . '../../../controlador/errores/errores.php';
@@ -10,21 +25,9 @@ require_once __DIR__ . '../../../controlador/errores/errores.php';
 <?php
 
 // Función para listar los artículos y centrarlos en la página
-function listarArticulos($animales, $accion = null, $resultadosBusqueda=null)
+function listarArticulos($animales, $accion = null, $resultadosBusqueda = null)
 {
-    
-
-    
-    if (!isset($resultadosBusqueda)) {
-        $prefijoRutaImagen = 'vista/';
-    } else {
-        
-        $prefijoRutaImagen = '../../vista/';
-    }
-
-   
-    
-    
+    $prefijoRutaImagen = 'vista/';
     $prefijoIconoModificar = './';
     $prefijoRutaModificar = './';
     $prefijoIconoEliminar = './';
@@ -35,10 +38,10 @@ function listarArticulos($animales, $accion = null, $resultadosBusqueda=null)
         $nombre_usuario = $_SESSION['nombre_usuario'];
     }
 
-    if ($resultadosBusqueda && !empty($animales)){
+    if ($resultadosBusqueda && !empty($animales)) {
         echo "<h1>Animales encontrados</h1>";
     }
-    if ($resultadosBusqueda && empty($animales)){
+    if ($resultadosBusqueda && empty($animales)) {
         echo "<h1>No se han encontrado animales</h1>";
     }
 
@@ -48,7 +51,12 @@ function listarArticulos($animales, $accion = null, $resultadosBusqueda=null)
         if ($accion == 'editar') {
             echo "<h1>Mis artículos</h1>";
         } else {
-            echo '<h1>Todos los artículos</h1>';
+            if (!$resultadosBusqueda) {
+                echo '<h1>Todos los artículos</h1>';
+            }
+
+            // var_dump($accion);
+            // exit();
         }
 
         // Iniciar el contenedor de tarjetas
@@ -98,10 +106,9 @@ function listarArticulos($animales, $accion = null, $resultadosBusqueda=null)
 
         echo '</div>';
     } else {
-        if (!$resultadosBusqueda && empty($animales)){
+        if (!$resultadosBusqueda && empty($animales)) {
             echo Mensajes::NO_ANIMALES;
         }
-        
     }
 }
 ?>
