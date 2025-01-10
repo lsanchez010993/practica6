@@ -43,8 +43,8 @@ if ($session_iniciada && $nombre === 'admin') {
         <?php if ($administrar): ?>
             <?php $_SESSION['administrar'] = $administrar; ?>
             <!-- Panel de Administración -->
-            <span class="nombre_usuario">Panel de administración:</span>
-            <button onclick="location.href='controlador/userController/eliminarNombreSession.php?variable=nombre_variable'">Atrás</button>
+            <span class="panel_administrador">Panel de administración:</span>
+            <button onclick="location.href='controlador/userController/eliminarNombreSession.php?variable=nombre_variable'">Volver al indice</button>
         <?php else: ?>
             <!-- Mensaje de Bienvenida (no administración) -->
             <div class="submenu">
@@ -56,7 +56,7 @@ if ($session_iniciada && $nombre === 'admin') {
     <!-- Barra de búsqueda -->
     <div>
         <form class="search-bar" action="" method="GET" onsubmit="return false;">
-            <input type="text" name="nombre_comun" placeholder="Buscar..." autocomplete="on">
+            <input type="text" name="nombre_comun" placeholder="Buscar animal..." autocomplete="on">
         </form>
         <!-- <div id="resultado" class="resultados"></div> -->
     </div>

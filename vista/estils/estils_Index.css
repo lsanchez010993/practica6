@@ -66,12 +66,8 @@ h2 {
     margin: 5px 0;
 }
 
-.nombre_usuario {
-    text-align: center; /* Centra el texto dentro de su contenedor */
-    width: 100%; /* Hace que el h2 ocupe todo el ancho */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 29px;
-}
+
+
 
 
 /* Contenedor principal */

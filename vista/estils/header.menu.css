@@ -111,7 +111,13 @@ header {
     padding-left: 30px;
 }
 
-
+.panel_administrador {
+    text-align: left; 
+    font-size: 29px;
+    position: relative; /* o simplemente eliminar esta línea */
+    display: block; /* garantiza que ocupe todo el ancho disponible */
+    margin: 10px 0; /* añade separación respecto a otros elementos */
+}
 
 
 .banner {

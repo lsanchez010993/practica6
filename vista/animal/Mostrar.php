@@ -49,10 +49,10 @@ function listarArticulos($animales, $accion = null, $resultadosBusqueda = null)
 
     if (!empty($animales)) {
         if ($accion == 'editar') {
-            echo "<h1>Mis artículos</h1>";
+            echo "<h1>Mis fichas</h1>";
         } else {
             if (!$resultadosBusqueda) {
-                echo '<h1>Todos los artículos</h1>';
+                echo '<h1>Todos los animales</h1>';
             }
 
             // var_dump($accion);
