@@ -56,6 +56,8 @@ function iniciarSesionYObtenerParametros() {
         $user_id = $_SESSION['usuario_id'];
         $is_admin = ($nombre_usuario === 'admin');
         require_once __DIR__ . '../../../controlador/userController/verificarSesion.php';
+        // var_dump("hola");
+        // exit();
         verificarSesion();
     } else {
         $nombre_usuario = null;

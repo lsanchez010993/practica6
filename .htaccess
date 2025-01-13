@@ -1,0 +1,19 @@
+# Activa la reescritura de URLs
+# RewriteEngine On
+
+# Comprueba si no se está usando HTTPS
+# RewriteCond %{HTTPS} off
+
+# Redirige a la misma URL pero con HTTPS
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Restringe el acceso a ciertos archivos sensibles
+# <FilesMatch "\.(htaccess|htpasswd|ini|log|sh)$">
+ #   Require all denied
+# </FilesMatch>
+
+# Impide que la página sea embebida en iframes de otros sitios
+# Header always set X-Frame-Options "SAMEORIGIN"
+
+# Activa la protección contra ataques XSS en navegadores compatibles
+# Header always set X-XSS-Protection "1; mode=block"

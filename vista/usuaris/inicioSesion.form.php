@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <title>Inicio de Sesión</title>
     <link rel="stylesheet" href="../estils/estilos_formulario.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
    
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
@@ -59,6 +60,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
         }
         ?>
+        <h1>Inicia sesion con:</h1>
+        <button onclick="location.href='../../controlador/userController/githubAuth.php'">
+        <a target="_blank" class="github-button">
+        <i class="fab fa-github"></i>
+    </button>
+       
+
     </form>
 
 </body>
