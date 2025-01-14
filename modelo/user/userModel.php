@@ -11,7 +11,7 @@ function guardarTokenRecuperacion($email, $token, $expiracion)
         $stmt->bindParam(':token', $token);
         $stmt->bindParam(':expiracion', $expiracion);
         $stmt->bindParam(':email', $email);
-     
+
         return $stmt->execute();
     } catch (PDOException $e) {
         error_log("Error al guardar el token: " . $e->getMessage());
@@ -24,7 +24,7 @@ function verificarToken($token)
 {
     try {
         $pdo = connectarBD();
-        
+
         $sql = "SELECT id FROM usuarios WHERE token_recuperacion = :token AND expiracion_token > NOW()";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':token', $token);
@@ -65,6 +65,27 @@ function obtenerUsuarioPorEmail($email)
         return $stmt->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         error_log("Error al obtener el usuario: " . $e->getMessage());
+        return false;
+    }
+}
+function comprobarUserLocal($email)
+{
+    try {
+        $pdo = connectarBD();
+
+        // Consultar si el usuario tiene una contraseña
+        $sql = "SELECT password FROM usuarios WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Devuelve true si es un usuario local (tiene contraseña), false si usa autenticación social
+        return empty($resultado['password']);
+      
+    } catch (PDOException $e) {
+        error_log("Error al comprobar el email: " . $e->getMessage());
         return false;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../../configs.php';
-require_once __DIR__ . '../../../vendor/autoload.php'; // Autoload de Composer
+require_once __DIR__ . '../../../vendor/autoload.php'; 
 use Hybridauth\Provider\GitHub;
 
 try {
@@ -19,8 +19,7 @@ try {
     ];
     // Autenticación con GitHub
     $github = new GitHub($config);
-    // var_dump("Hola");
-    // exit;
+
     if (!$github->isConnected()) {
         $github->authenticate();
     }

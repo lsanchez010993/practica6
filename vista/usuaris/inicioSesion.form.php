@@ -49,13 +49,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <button type="button" onclick="location.href='../../index.php'">Atrás</button>
 
         <?php
+     
         // Mostrar errores si existen
         if (!empty($errores)) {
             foreach ($errores as $error) {
                 if (strpos($error, '!') !== false) {
                     echo '<p class="correcto">' . htmlspecialchars($error) . '</p>';
                 } else {
+                   
                     echo '<p class="error">' . htmlspecialchars($error) . '</p>';
+                   
+                   
                 }
             }
         }
