@@ -11,7 +11,7 @@ body {
     background-attachment: fixed;
     color: #2e2e2e;
     font-family: 'Open Sans Condensed', sans-serif;
-    padding-top: 50px; /* Espacio para el menú .inicio */
+    
 }
 
 /* Estilos para los títulos */
@@ -46,12 +46,12 @@ h2 {
 
 /* Contenedor principal */
 .contenidor {
-    width: 90%;
-    max-width: 1000px;
+    width: 70%;
+    max-width: 90%;
     margin: auto;
 }
 
-.contenidor .articles {
+/* .contenidor .articles {
     margin-bottom: 20px;
 }
 
@@ -62,7 +62,7 @@ h2 {
 .contenidor .articles ul li {
     padding: 15px 10px;
     border-bottom: 1px solid #c8c8c8;
-}
+} */
 
 /* Estilos para la paginación */
 .paginacio {
@@ -112,77 +112,93 @@ h2 {
     background: #399228;
 }
 
+
+
+
 /* Estilos para las tarjetas */
 .contenedor-tarjetas {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px auto;
-    max-width: 1200px;
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en varias filas */
+    justify-content: center; /* Centra las tarjetas dentro del contenedor */
+    gap: 20px; /* Espaciado entre las tarjetas */
+    margin: 20px auto; /* Centra el contenedor horizontalmente */
+    max-width: 1200px; /* Ancho máximo del contenedor */
+    padding: 0 10px; /* Espaciado interno para evitar cortes en los bordes */
+    box-sizing: border-box; /* Asegura que padding y borde se incluyan en el ancho */
 }
 
 .tarjeta {
-    flex: 1 1 40%;           /* Las tarjetas ocuparán hasta el 40% del ancho del contenedor */
-    max-width: 400px;        /* Ancho máximo para las tarjetas */
-    margin: 10px;
+    flex: 1 1 calc(33.333% - 40px); /* Tres tarjetas por fila */
+    max-width: 400px; /* Ancho máximo fijo */
     text-align: center;
     background-color: #f9f9f9;
     padding: 15px;
+    margin: 10px; /* Espaciado externo */
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-sizing: border-box;  /* Asegura que el padding y el borde se incluyan en el ancho total */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: transform 0.2s ease-in-out; /* Animación */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
 }
 
-.tarjeta-imagen {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;       /* Recorta la imagen para que llene el contenedor */
-    overflow: hidden;        /* Oculta cualquier parte de la imagen que se salga del contenedor */
-    border-radius: 5px;
-    margin-bottom: 10px;
+.tarjeta:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
 }
+
+
+
+@media (max-width: 768px) {
+    .tarjeta {
+        flex: 1 1 calc(50% - 40px); /* Dos tarjetas por fila en pantallas medianas */
+    }
+}
+
+@media (max-width: 480px) {
+    .tarjeta {
+        flex: 1 1 100%; /* Una tarjeta por fila en pantallas pequeñas */
+    }
+}
+
 
 .nombre_comun {
-    font-size: 20px;
-    font-weight: bold;
-    color: #3f1213;
+    font-size: 20px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    color: #3f1213; /* Color marrón oscuro */
 }
 
 .nombre_cientifico {
     font-size: 20px;
-    color: #1b4a81;
+    color: #1b4a81; /* Color azul */
 }
 
-/* Estilo para el campo de descripción */
-.descripcion {
-    max-height: 50px; /* Altura predeterminada cuando está contraído */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    transition: max-height 0.3s ease, white-space 0.3s ease;
-    cursor: pointer;
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .tarjeta {
+        flex: 1 1 calc(50% - 20px); /* Dos tarjetas por fila en pantallas medianas */
+        max-width: calc(50% - 20px);
+    }
 }
 
-/* Expansión al pasar el ratón */
-.descripcion:hover {
-    max-height: 200px; /* Altura máxima cuando está expandido */
-    white-space: normal;
-    overflow-y: auto; /* Permite desplazamiento si el contenido es muy grande */
+@media (max-width: 480px) {
+    .tarjeta {
+        flex: 1 1 100%; /* Una tarjeta por fila en pantallas pequeñas */
+        max-width: 30%;
+    }
 }
+
 
 
 
 /* Estilos para el contenedor de clase desplegable */
-.desplegable {
+.desplegable_ordenacion {
     display: flex;       /* Alinea los formularios uno al lado del otro */
-    justify-content: center; /* Centra los formularios horizontalmente */
+    justify-content: flex-end; /* Alinea los formularios a la derecha */
     gap: 20px;           /* Espacio entre formularios */
     margin-top: 20px;    /* Margen superior */
 }
 
 /* Estilos para el formulario dentro de desplegable */
-.desplegable form {
+.desplegable_ordenacion form {
     display: flex;        /* Alinea los elementos del formulario en línea */
     align-items: center;  /* Centra los elementos verticalmente */
     gap: 10px;            /* Espacio entre elementos del formulario */
@@ -193,14 +209,14 @@ h2 {
 }
 
 /* Estilos para la etiqueta del selector */
-.desplegable label {
+.desplegable_ordenacion label {
     font-family: 'Open Sans Condensed', sans-serif; /* Fuente coherente */
     color: #fff;                                   /* Texto en blanco para contraste */
     font-size: 16px;                               /* Tamaño de fuente legible */
 }
 
 /* Estilos para el selector (select) */
-.desplegable select {
+.desplegable_ordenacion select {
     padding: 8px 12px;                             /* Relleno interno */
     background: #424242;                           /* Fondo similar a los enlaces de paginación */
     color: #fff;                                   /* Texto en blanco */
@@ -212,7 +228,53 @@ h2 {
 }
 
 /* Efecto hover para el selector */
-.desplegable select:hover {
+.desplegable_ordenacion select:hover {
     background: #121612; /* Color de fondo al pasar el ratón */
 }
+
+
+
+/* Estilos para el contenedor de clase desplegable */
+.desplegable_paginacion {
+    display: flex;       /* Alinea los formularios uno al lado del otro */
+    justify-content: center; /* Centra los formularios horizontalmente */
+    gap: 20px;           /* Espacio entre formularios */
+    margin-top: 20px;    /* Margen superior */
+}
+
+/* Estilos para el formulario dentro de desplegable */
+.desplegable_paginacion form {
+    display: flex;        /* Alinea los elementos del formulario en línea */
+    align-items: center;  /* Centra los elementos verticalmente */
+    gap: 10px;            /* Espacio entre elementos del formulario */
+    background: #424242;  /* Fondo similar a los enlaces de paginación */
+    padding: 10px 20px;   /* Relleno interno para una mejor apariencia */
+    border-radius: 5px;   /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+}
+
+/* Estilos para la etiqueta del selector */
+.desplegable_paginacion label {
+    font-family: 'Open Sans Condensed', sans-serif; /* Fuente coherente */
+    color: #fff;                                   /* Texto en blanco para contraste */
+    font-size: 16px;                               /* Tamaño de fuente legible */
+}
+
+/* Estilos para el selector (select) */
+.desplegable_paginacion select {
+    padding: 8px 12px;                             /* Relleno interno */
+    background: #424242;                           /* Fondo similar a los enlaces de paginación */
+    color: #fff;                                   /* Texto en blanco */
+    border: none;                                  /* Sin bordes predeterminados */
+    border-radius: 5px;                            /* Bordes redondeados */
+    font-family: 'Open Sans Condensed', sans-serif; /* Fuente coherente */
+    cursor: pointer;                               /* Cursor de puntero al pasar sobre el selector */
+    transition: background-color 0.3s ease;        /* Transición suave al interactuar */
+}
+
+/* Efecto hover para el selector */
+.desplegable_paginacion select:hover {
+    background: #121612; /* Color de fondo al pasar el ratón */
+}
+
 

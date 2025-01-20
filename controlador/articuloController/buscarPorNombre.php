@@ -9,9 +9,14 @@ if (session_status() === PHP_SESSION_NONE) {
 if (isset($_GET['nombre_comun']) && !empty($_GET['nombre_comun'])) {
     $nombre_comun = $_GET['nombre_comun'];
 
+  
+
     if (isset($_SESSION['usuario_id'])) {
+        // var_dump("hola");
+        // exit();
         $resultadosBusqueda = obtenerAnimalPorNombre_y_User($nombre_comun, $_SESSION['usuario_id']);
     } else {
+       
         $resultadosBusqueda = obtenerAnimalPorNombre($nombre_comun);
     }
 }

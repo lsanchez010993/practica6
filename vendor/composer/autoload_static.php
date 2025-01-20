@@ -7,6 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInit66501ca8fa27c2f60c8a58c36c7c5686
 {
     public static $prefixLengthsPsr4 = array (
+        'c' => 
+        array (
+            'chillerlan\\Settings\\' => 20,
+            'chillerlan\\QRCode\\' => 18,
+        ),
         'H' => 
         array (
             'Hybridauth\\' => 11,
@@ -14,6 +19,14 @@ class ComposerStaticInit66501ca8fa27c2f60c8a58c36c7c5686
     );
 
     public static $prefixDirsPsr4 = array (
+        'chillerlan\\Settings\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-settings-container/src',
+        ),
+        'chillerlan\\QRCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
+        ),
         'Hybridauth\\' => 
         array (
             0 => __DIR__ . '/..' . '/hybridauth/hybridauth/src',

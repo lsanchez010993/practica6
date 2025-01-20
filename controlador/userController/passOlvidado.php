@@ -31,8 +31,9 @@ function procesarSolicitudRecuperacion($email)
 
     if (guardarTokenRecuperacion($email, $token, $expiracion)) {
         // Enviar el correo electrónico con PHPMailer
-        $enlace = "http://luissanchez.cat/vista/usuaris/cambiarContrasenya.php?token=" . urlencode($token);
-        // $enlace = "localhost/practicas/practica5/vista/usuaris/cambiarContrasenya.php?token=" . urlencode($token);
+       
+        $enlaceCompleto = ENLACE_RECUPERACION_PASS . urlencode($token);
+        
 
         $mail = new PHPMailer(true);
 
@@ -65,13 +66,13 @@ function procesarSolicitudRecuperacion($email)
             $mail->Body    = '
                 <p>Hola ' . htmlspecialchars($usuario['nombre']) . ',</p>
                 <p>Haz clic en el siguiente enlace para recuperar tu contraseña:</p>
-                <p><a href="' . $enlace . '">' . $enlace . '</a></p>
+                <p><a href="' . $enlaceCompleto . '">' . $enlaceCompleto . '</a></p>
                 <p>Si no solicitaste este cambio, puedes ignorar este correo.</p>
                 <p>Saludos.</p>
             ';
             $mail->AltBody = 'Hola ' . htmlspecialchars($usuario['nombre']) . ',\n\n'
                 . 'Haz clic en el siguiente enlace para recuperar tu contraseña:\n'
-                . $enlace . '\n\n'
+                . $enlaceCompleto . '\n\n'
                 . 'Si no solicitaste este cambio, puedes ignorar este correo.\n\n'
                 . 'Saludos.';
 

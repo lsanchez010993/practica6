@@ -1,5 +1,6 @@
 {
     "require": {
-        "hybridauth/hybridauth": "^3.11"
+        "hybridauth/hybridauth": "^3.11",
+        "chillerlan/php-qrcode": "^5.0"
     }
 }

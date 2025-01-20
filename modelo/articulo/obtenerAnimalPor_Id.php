@@ -14,6 +14,23 @@ function obtenerAnimalPor_Id($id) {
         return false; 
     }
 }
+function obtenerAnimales() {
+    try {
+        require_once __DIR__ . '/../conexion.php';
+        $pdo = connectarBD();
+        $sql = "SELECT * FROM animales";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        // Obtener todas las filas como un array asociativo
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // Loguear el error para fines de depuración
+        error_log("Error al obtener los animales: " . $e->getMessage());
+        return false; 
+    }
+}
+
 function obtenerAnimalPorNombre($nombre_comun) {
     try {
         require_once __DIR__ . '/../conexion.php';

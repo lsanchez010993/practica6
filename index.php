@@ -58,7 +58,7 @@ if ($session_iniciada && $nombre === 'admin') {
         <form class="search-bar" action="" method="GET" onsubmit="return false;">
             <input type="text" name="nombre_comun" placeholder="Buscar animal..." autocomplete="on">
         </form>
-        <!-- <div id="resultado" class="resultados"></div> -->
+       
     </div>
 
     <div class="menu menu-right">
@@ -99,16 +99,14 @@ if ($session_iniciada && $nombre === 'admin') {
 
 
     <main>
+        <!-- //aqui es donde se engancha el resultado de la busqueda -->
     <div id="resultat" class="resultados"></div>
         <?php
 
         include_once 'vista/animal/vistaAnimales.php';
 
-
-
         ?>
-
-      
+        
     </main>
 
 

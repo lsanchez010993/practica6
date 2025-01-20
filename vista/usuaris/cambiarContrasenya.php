@@ -30,7 +30,7 @@ $token = trim($_GET['token'] ?? '');
         <label for="password_confirm">Confirmar Contraseña:</label>
         <input type="password" name="password_confirm" id="password_confirm">
         <button type="submit">Cambiar Contraseña</button>
-        <button type="button" class="btn" onclick="location.href='../..vista/usuaris/iniciarSesion.form.php'">Iniciar sesión</button>
+        <button type="button" class="btn" onclick="location.href='/vista/usuaris/iniciarSesion.form.php'">Iniciar sesión</button>
     </form>
    
 </body>
