@@ -44,5 +44,5 @@ function listarArticulosController($animales = null, $show_edit)
     ];
 
 
-    require __DIR__ . '/../../vista/animal/mostrarAnimales.php';
+    require __DIR__ . '/../../vista/animal/mostrarAnimalesVista.php';
 }

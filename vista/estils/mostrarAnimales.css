@@ -93,3 +93,8 @@
 .close:hover {
     color: #000;
 }
+#insertarQR-modal {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

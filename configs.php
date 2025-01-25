@@ -1,4 +1,4 @@
-<!-- para dondominio -->
+
 <?php
 // define("DB_HOST", "bbdd.luissanchez.cat");
 // define("DB_NAME", "ddb237135");
@@ -11,10 +11,11 @@
 // define("kEY_SECRET_GITHUB","737a0c072a32a00061c594e882ec9369d15566aa");
 // define ("ENLACE_RECUPERACION_PASS", "http://luissanchez.cat/vista/usuaris/cambiarContrasenya.php?token=");
 // define("URL_QR", "http://luissanchez.cat/vista/animal/mostrarQR.php?id=");
+// define("URL_QR", "http://luissanchez.cat/vista/animal/insertarAnimal_QR.php");
 
 ?>
 
-<!-- phpmyadmin (local) -->
+
 <?php
 define("DB_HOST", "localhost"); // 'localhost' o la IP local
 define("DB_NAME", "pt05_luis_sanchez"); // Cambia si usas otra base de datos
@@ -26,6 +27,6 @@ define("CALLBACKURL", "/practicas/practica6/controlador/userController/githubAut
 define("ID_GITHUB", "Ov23licaFa22CeJ8F1Al");
 define("kEY_SECRET_GITHUB", "fcf3d6db0516a032ab052a178c4343aa79e4a511");
 define("ENLACE_RECUPERACION_PASS", "localhost/practicas/practica5/vista/usuaris/cambiarContrasenya.php?token=");
-define("URL_QR", "http://localhost/practicas/practica6/vista/animal/mostrarQR.php?id=");
+define("URL_QR", "http://localhost/practicas/practica6/vista/animal");
 
 ?>

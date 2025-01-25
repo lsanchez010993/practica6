@@ -86,6 +86,14 @@ function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden,
     echo '</ul>';
     echo '</section>';
 }
+function mostrarBotones($user_id)
+{
+    if ($user_id !== null) { // Corregido el operador de comparación
+        echo '<button class="boton_vista" onclick="location.href=\'index.php?todosAnimales=true\'">Todos los animales</button>';
+        echo '<button class="boton_vista" onclick="location.href=\'index.php\'">Mis animales</button>';
+        echo '<button class="boton_vista" onclick="location.href=\'index.php?animalesCopiados=true\'">Animales copiados</button>';
+    }
+}
 
 
 ?>

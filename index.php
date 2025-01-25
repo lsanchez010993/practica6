@@ -19,7 +19,8 @@ $administrar = false;
 if ($session_iniciada && $nombre === 'admin') {
     $administrar = isset($_GET['administrar']) && $_GET['administrar'] === 'true';
 }
-
+// $todosAnimales = isset($_GET['todosAnimales']) && $_GET['todosAnimales'] === '';
+$todosAnimales = isset($_GET['todosAnimales']) ? htmlspecialchars($_GET['todosAnimales']) : '';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,7 +30,7 @@ if ($session_iniciada && $nombre === 'admin') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Principal</title>
     <link rel="stylesheet" href="vista/estils/header.menu.css">
-  
+
     <base href="./">
 
 </head>
@@ -39,74 +40,88 @@ if ($session_iniciada && $nombre === 'admin') {
     <!-- Banner en la parte superior -->
     <header class="banner">
 
-    <?php if ($session_iniciada): ?>
-        <?php if ($administrar): ?>
-            <?php $_SESSION['administrar'] = $administrar; ?>
-            <!-- Panel de Administración -->
-            <span class="panel_administrador">Panel de administración:</span>
-            <button onclick="location.href='controlador/userController/eliminarNombreSession.php?variable=nombre_variable'">Volver al indice</button>
-        <?php else: ?>
-            <!-- Mensaje de Bienvenida (no administración) -->
-            <div class="submenu">
-                <span class="nombre_usuario">Bienvenido: <?php echo htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8'); ?></span>
-            </div>
+        <?php if ($session_iniciada): ?>
+
+
+
+            <?php if ($administrar): ?>
+                <?php $_SESSION['administrar'] = $administrar; ?>
+                <!-- Panel de Administración -->
+                <span class="panel_administrador">Panel de administración:</span>
+                <button onclick="location.href='controlador/userController/eliminarNombreSession.php?variable=nombre_variable'">Volver al indice</button>
+            <?php else: ?>
+                <!-- Mensaje de Bienvenida (no administración) -->
+                <div class="submenu">
+                    <span class="nombre_usuario">Bienvenido: <?php echo htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8'); ?></span>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
-    <?php endif; ?>
 
-    <!-- Barra de búsqueda -->
-    <div>
-        <form class="search-bar" action="" method="GET" onsubmit="return false;">
-            <input type="text" name="nombre_comun" placeholder="Buscar animal..." autocomplete="on">
-        </form>
-       
-    </div>
+        <!-- Barra de búsqueda -->
+        <div>
+            <form class="search-bar" action="" method="GET" onsubmit="return false;">
+                <input type="text" name="nombre_comun" placeholder="Buscar animal..." autocomplete="on">
+            </form>
 
-    <div class="menu menu-right">
-        <?php if (!isset($resultadosBusqueda)): ?>
-            <!-- Menú principal -->
-            <button class="menu-toggle">
-                <?php echo $session_iniciada ? 'Menú' : 'No has iniciado sesión'; ?>
-            </button>
-            <div class="menu-content">
-                <?php if (!$session_iniciada): ?>
-                    <!-- Opciones si la sesión no está iniciada -->
-                    <button onclick="location.href='vista/usuaris/inicioSesion.form.php'">Iniciar Sesión</button>
-                    <button onclick="location.href='vista/usuaris/crearUsuario.php'">Registrarse</button>
-                    <button onclick="location.href='vista/usuaris/recuperarContrasenya.php'">Recuperar Contraseña</button>
-                <?php else: ?>
-                    <?php if ($nombre === 'admin'): ?>
-                        <!-- Submenú de administración (si el usuario es admin) -->
-                        <div class="submenu">
-                            <button class="submenu-toggle">Administrar</button>
-                            <div class="submenu-content">
-                                <button onclick="location.href='controlador/userController/administrarUsuarios.php'">Administrar Usuarios</button>
-                                <button onclick="location.href='index.php?administrar=true'">Administrar Animales</button>
+        </div>
+
+        <div class="menu menu-right">
+            <?php if (!isset($resultadosBusqueda)): ?>
+                <!-- Menú principal -->
+                <button class="menu-toggle">
+                    <?php echo $session_iniciada ? 'Menú' : 'No has iniciado sesión'; ?>
+                </button>
+                <div class="menu-content">
+                    <?php if (!$session_iniciada): ?>
+                        <!-- Opciones si la sesión no está iniciada -->
+                        <button onclick="location.href='vista/usuaris/inicioSesion.form.php'">Iniciar Sesión</button>
+                        <button onclick="location.href='vista/usuaris/crearUsuario.php'">Registrarse</button>
+                        <button onclick="location.href='vista/usuaris/recuperarContrasenya.php'">Recuperar Contraseña</button>
+                    <?php else: ?>
+                        <?php if ($nombre === 'admin'): ?>
+                            <!-- Submenú de administración (si el usua
+                             rio es admin) -->
+                            <div class="submenu">
+                                <button class="submenu-toggle">Administrar</button>
+                                <div class="submenu-content">
+                                    <button onclick="location.href='controlador/userController/administrarUsuarios.php'">Administrar Usuarios</button>
+                                    <button onclick="location.href='index.php?administrar=true'">Administrar Animales</button>
+                                </div>
                             </div>
-                        </div>
+                        <?php endif; ?>
+
+                        <!-- Opciones si la sesión está iniciada (no admin o admin tras su menú) -->
+                        <button onclick="location.href='vista/animal/insertarNuevoAnimal.php'">Insertar Nuevo Artículo</button>
+                        <button onclick="location.href='controlador/userController/editarPerfilesUser.php'">Editar Perfil</button>
+                        <button onclick="location.href='modelo/user/cerrarSesion.php'">Cerrar Sesión</button>
+                        <button onclick="location.href='vista/usuaris/cambiarPass.php'">Cambiar Password</button>
                     <?php endif; ?>
+                </div>
+            <?php endif; ?>
+        </div>
 
-                    <!-- Opciones si la sesión está iniciada (no admin o admin tras su menú) -->
-                    <button onclick="location.href='vista/animal/insertarNuevoAnimal.php'">Insertar Nuevo Artículo</button>
-                    <button onclick="location.href='controlador/userController/editarPerfilesUser.php'">Editar Perfil</button>
-                    <button onclick="location.href='modelo/user/cerrarSesion.php'">Cerrar Sesión</button>
-                    <button onclick="location.href='vista/usuaris/cambiarPass.php'">Cambiar Password</button>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-    </div>
-
-</header>
+    </header>
 
 
     <main>
-        <!-- //aqui es donde se engancha el resultado de la busqueda -->
-    <div id="resultat" class="resultados"></div>
-        <?php
 
-        include_once 'vista/animal/vistaAnimales.php';
+        <!-- //aqui es donde se engancha el resultado de la busqueda -->
+        <div id="resultat" class="resultados"></div>
+        <?php
+        // var_dump($todosAnimales);
+        // exit();
+
+
+
+        include_once 'vista/animal/vistaAnimales.php'
+
+
+
+        // if ($todosAnimales) include_once 'vista/animal/vistaAnimales.php?todosAnimales';
+        // else include_once 'vista/animal/vistaAnimales.php';
 
         ?>
-        
+
     </main>
 
 

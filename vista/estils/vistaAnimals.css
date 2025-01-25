@@ -233,6 +233,23 @@ h2 {
 }
 
 
+.boton_vista{
+    background: #424242;
+    color: #fff;  
+    border: none;                                  /* Sin bordes predeterminados */
+    border-radius: 5px;                            /* Bordes redondeados */
+    font-family: 'Open Sans Condensed', sans-serif; /* Fuente coherente */
+    cursor: pointer;                               /* Cursor de puntero al pasar sobre el selector */
+    transition: background-color 0.3s ease;        /* Transición suave al interactuar */
+    font-size: 16px;   
+    padding: 10px 20px;   /* Relleno interno para una mejor apariencia */
+    
+    justify-content: center; /* Centra los formularios horizontalmente */
+    gap: 20px;           /* Espacio entre formularios */
+    margin-top: 20px;    /* Margen superior */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+
+}
 
 /* Estilos para el contenedor de clase desplegable */
 .desplegable_paginacion {

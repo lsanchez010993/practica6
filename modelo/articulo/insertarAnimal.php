@@ -60,3 +60,27 @@ function insertarAnimal($nombre_comun, $nombre_cientifico, $descripcion, $rutaIm
         return false;
     }
 }
+function insertarCopiaAnimal_QR($nombre_comun, $nombre_cientifico, $descripcion, $rutaImagen,  $es_mamifero)
+{
+    try {
+        require_once __DIR__ . '/../conexion.php';
+        $pdo = connectarBD();
+      
+
+        // Preparar la consulta SQL para insertar un nuevo registro en la tabla animales
+        $sql = "INSERT INTO animales_copia (nombre_comun, nombre_cientifico, descripcion, ruta_imagen, usuario_id, es_mamifero) 
+                VALUES (:nombre_comun, :nombre_cientifico, :descripcion, :ruta_imagen, :usuario_id, :es_mamifero)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':nombre_comun', $nombre_comun, PDO::PARAM_STR);
+        $stmt->bindParam(':nombre_cientifico', $nombre_cientifico, PDO::PARAM_STR);
+        $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+        $stmt->bindParam(':ruta_imagen', $rutaImagen, PDO::PARAM_STR);
+        $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+        $stmt->bindParam(':es_mamifero', $es_mamifero, PDO::PARAM_INT); // Cambiado a PARAM_INT
+       
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        error_log("Error al insertar un nuevo animal: " . $e->getMessage());
+        return false;
+    }
+}
