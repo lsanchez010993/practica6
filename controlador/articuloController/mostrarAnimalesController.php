@@ -17,6 +17,11 @@ function listarArticulosController($animales = null, $show_edit)
     }
 
     $nombre_usuario = isset($_SESSION['nombre_usuario']) ? $_SESSION['nombre_usuario'] : null;
+   
+    $animalesCopiados = isset($_GET['animalesCopiados'])
+    ? filter_var($_GET['animalesCopiados'], FILTER_VALIDATE_BOOLEAN)
+    : false;
+
     $esAdmin = (isset($_SESSION['administrar']) && $nombre_usuario === 'admin');
     $prefijoRutaImagen = 'vista/';
 
@@ -30,7 +35,7 @@ function listarArticulosController($animales = null, $show_edit)
 
 
         // generar la URL para el QR
-        $qrURL  = URL_QR . $animal['id'];
+        $qrURL  = URL_QR . 'mostrarQR.php/?id='.$animal['id'];
         $qr = (new QRCode)->render($qrURL);
         $animales[$i]['qr'] = $qr;
     }
@@ -41,6 +46,7 @@ function listarArticulosController($animales = null, $show_edit)
         'show_edit'            => $show_edit,
         'esAdmin'           => $esAdmin,
         'prefijoRutaImagen' => $prefijoRutaImagen,
+        'animalesCopiados' =>$animalesCopiados
     ];
 
 

@@ -105,20 +105,12 @@ $todosAnimales = isset($_GET['todosAnimales']) ? htmlspecialchars($_GET['todosAn
 
     <main>
 
-        <!-- //aqui es donde se engancha el resultado de la busqueda -->
         <div id="resultat" class="resultados"></div>
         <?php
-        // var_dump($todosAnimales);
-        // exit();
 
 
 
         include_once 'vista/animal/vistaAnimales.php'
-
-
-
-        // if ($todosAnimales) include_once 'vista/animal/vistaAnimales.php?todosAnimales';
-        // else include_once 'vista/animal/vistaAnimales.php';
 
         ?>
 

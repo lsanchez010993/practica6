@@ -7,13 +7,13 @@ function obtenerArticulosYTotal($params)
 {
 
 
-    // Calcular desde qué artículo iniciar
+
     $start = ($params['pagina'] - 1) * $params['articulosPorPagina'];
 
  
    
 
-    // Obtener el total de artículos y los artículos a mostrar según el contexto
+
     if (!empty($params['is_admin']) && !empty($params['administrar'])) {
         // Admin en modo administrar: mostrar todos los artículos con opción de editar
         $totalArticulos = contarArticulos();
@@ -38,10 +38,10 @@ function obtenerArticulosYTotal($params)
         // echo "animales copiados";
 
 
-        $totalArticulos = contarArticulos($params['user_id'], $params['animalesCopiados']);
+        $totalArticulos = contarAnimalesCopiados($params['user_id']);
         // var_dump($totalArticulos);
         $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden'], $params['user_id'], $params['animalesCopiados']);
-        $show_edit = false;
+        $show_edit = true;
     }else{
         //sesion no inciada
         $totalArticulos = contarArticulos($params['user_id'], $params['animalesCopiados']);
@@ -67,7 +67,6 @@ function obtenerArticulosYTotal($params)
 }
 
 
-
 function iniciarSesionYObtenerParametros()
 {
     // Iniciar la sesión si no está iniciada
@@ -80,9 +79,8 @@ function iniciarSesionYObtenerParametros()
         $nombre_usuario = $_SESSION['nombre_usuario'];
         $user_id = $_SESSION['usuario_id'];
         $is_admin = ($nombre_usuario === 'admin');
+
         require_once __DIR__ . '../../../controlador/userController/verificarSesion.php';
-        // var_dump("hola");
-        // exit();
         verificarSesion();
     } else {
         $nombre_usuario = null;
@@ -91,8 +89,9 @@ function iniciarSesionYObtenerParametros()
     }
 
     // Verificar si el parámetro 'administrar' está activado
-    $administrar = isset($_GET['administrar']) && $_GET['administrar'] === 'true';
+    $administrar = (isset($_GET['administrar']) && $_GET['administrar'] === 'true');
 
+    // Obtener filtros
     $todosAnimales = isset($_GET['todosAnimales'])
         ? filter_var($_GET['todosAnimales'], FILTER_VALIDATE_BOOLEAN)
         : false;
@@ -101,24 +100,16 @@ function iniciarSesionYObtenerParametros()
         ? filter_var($_GET['animalesCopiados'], FILTER_VALIDATE_BOOLEAN)
         : false;
 
-
-
-    // Obtener el número de artículos por página seleccionado por el usuario y almacenarlo en una cookie
+    // Obtener el número de artículos por página (SIN usar cookies)
     if (isset($_GET['posts_per_page'])) {
         $articulosPorPagina = (int)$_GET['posts_per_page'];
-        setcookie('posts_per_page', $articulosPorPagina, time() + (86400 * 30), "/"); // La cookie expira en 30 días
-    } elseif (isset($_COOKIE['posts_per_page'])) {
-        $articulosPorPagina = (int)$_COOKIE['posts_per_page'];
     } else {
         $articulosPorPagina = 6; // Valor por defecto de 6
     }
 
-    // Obtener la página actual y almacenarla en una cookie
+    // Obtener la página actual (SIN usar cookies)
     if (isset($_GET['page'])) {
         $pagina = (int)$_GET['page'];
-        setcookie('current_page', $pagina, time() + (86400 * 30), "/"); // La cookie expira en 30 días
-    } elseif (isset($_COOKIE['current_page'])) {
-        $pagina = (int)$_COOKIE['current_page'];
     } else {
         $pagina = 1;
     }
@@ -128,20 +119,21 @@ function iniciarSesionYObtenerParametros()
     }
 
     // Obtener el criterio de ordenación
-    $orden = isset($_GET['orden']) ? $_GET['orden'] : 'nombre_asc'; // Por defecto, ordenar por nombre ascendente
+    $orden = isset($_GET['orden']) ? $_GET['orden'] : 'nombre_asc'; // Por defecto, ordenar por nombre asc
 
     return [
-        'nombre_usuario' => $nombre_usuario,
-        'user_id' => $user_id,
-        'is_admin' => $is_admin,
-        'administrar' => $administrar,
+        'nombre_usuario'   => $nombre_usuario,
+        'user_id'          => $user_id,
+        'is_admin'         => $is_admin,
+        'administrar'      => $administrar,
         'articulosPorPagina' => $articulosPorPagina,
-        'pagina' => $pagina,
-        'orden' => $orden,
-        'todosAnimales' => $todosAnimales,
+        'pagina'           => $pagina,
+        'orden'            => $orden,
+        'todosAnimales'    => $todosAnimales,
         'animalesCopiados' => $animalesCopiados
     ];
 }
+
 function mostrarArticulos($articlesData, $administrar)
 {
     require_once __DIR__ . '../../../vista/animal/Mostrar.php';

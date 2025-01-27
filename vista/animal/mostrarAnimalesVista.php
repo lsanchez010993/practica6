@@ -1,3 +1,8 @@
+<?php
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,13 +12,30 @@
     <title>Listado de Animales</title>
     <link rel="stylesheet" href="vista/estils/mostrarAnimales.css">
     <script defer type="module" src="vista/js/QR.js"></script>
+    <script>
+        function confirmarEliminacion() {
+            return confirm("¿Estás seguro de que deseas eliminar este elemento?");
+        }
+    </script>
 </head>
 
 <body>
 
     <!-- Títulos -->
     <?php if (!empty($animales)): ?>
-        <h1><?php echo $show_edit ? "Mis fichas" : "Todos los animales:"; ?></h1>
+        
+        <h1>
+            <?php
+            if ($show_edit) {
+                echo "Mis fichas";
+            } elseif ($animalesCopiados) {
+                echo "Animales copiados";
+            } else {
+                echo "Todos los animales:";
+            }
+            ?>
+        </h1>
+
 
         <div class="contenedor-tarjetas">
             <?php foreach ($animales as $animal): ?>
@@ -72,15 +94,18 @@
                         <p>Selecciona los datos que quieres obtener con el QR</p><br>
 
 
-                        <!-- IMPORTANTE: Usa el id de la ficha del animal para distinguir estos checkboxes -->
-                        <input type="checkbox" class="checkbox-qr" id="nombre-comun-<?php echo $animal['id']; ?>" checked>
-                        <label for="nombre-comun-<?php echo $animal['id']; ?>">Nombre común</label><br>
+                        
+                        <?php if (isset($_SESSION['usuario_id']) && !empty($_SESSION['usuario_id'])): ?>
+                            <input type="checkbox" class="checkbox-qr" id="nombre-comun-<?php echo $animal['id']; ?>" checked>
+                            <label for="nombre-comun-<?php echo $animal['id']; ?>">Nombre común</label><br>
 
-                        <input type="checkbox" class="checkbox-qr" id="nombre-cientifico-<?php echo $animal['id']; ?>" checked>
-                        <label for="nombre-cientifico-<?php echo $animal['id']; ?>">Nombre científico</label><br>
+                            <input type="checkbox" class="checkbox-qr" id="nombre-cientifico-<?php echo $animal['id']; ?>" checked>
+                            <label for="nombre-cientifico-<?php echo $animal['id']; ?>">Nombre científico</label><br>
 
-                        <input type="checkbox" class="checkbox-qr" id="descripcion-<?php echo $animal['id']; ?>" checked>
-                        <label for="descripcion-<?php echo $animal['id']; ?>">Descripción</label><br>
+                            <input type="checkbox" class="checkbox-qr" id="descripcion-<?php echo $animal['id']; ?>" checked>
+                            <label for="descripcion-<?php echo $animal['id']; ?>">Descripción</label><br>
+                        <?php endif; ?>
+
 
                         <br><br>
                         <h3>QR Code</h3>

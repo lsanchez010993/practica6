@@ -56,6 +56,10 @@ form input[type="email"] {
     box-sizing: border-box;
     font-size: 14px;
 }
+.iniciarSesion{
+    background-color: #28a745;
+    color: white;
+}
 
 /* Estilo de los botones */
 button {

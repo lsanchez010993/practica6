@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ .'../../../controlador/articuloController/manejarDatos.php';
+require_once __DIR__ .'../../../controlador/articuloController/vistaAnimalesController.php';
 
 function mostrarOrdenForm($pagina, $articulosPorPagina, $administrar = false, $orden = '') {
     ?>
@@ -49,7 +49,23 @@ function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden,
     $totalPages = ceil($totalArticles / $articulosPorPagina);
 
     // Parámetros adicionales para mantener en los enlaces
-    $additionalParams = '&posts_per_page=' . $articulosPorPagina . '&orden=' . urlencode($orden);
+    $additionalParams = '';
+
+    // Ejemplo para 'todosAnimales' o 'animalesCopiados'
+    if (isset($_GET['todosAnimales'])) {
+        $additionalParams .= '&todosAnimales=' . urlencode($_GET['todosAnimales']);
+    }
+    if (isset($_GET['animalesCopiados'])) {
+        $additionalParams .= '&animalesCopiados=' . urlencode($_GET['animalesCopiados']);
+    }
+    
+    // También mantienes otros parámetros que ya tenías
+    $additionalParams .= '&posts_per_page=' . $articulosPorPagina;
+    $additionalParams .= '&orden=' . urlencode($orden);
+    
+    if ($administrar) {
+        $additionalParams .= '&administrar=true';
+    }
 
     // Agregar el parámetro "administrar" si es true
     if ($administrar) {

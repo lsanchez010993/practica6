@@ -4,8 +4,10 @@ require_once '../../controlador/userController/verificarSesion.php';
 require_once '../../modelo/articulo/insertarAnimal.php';
 require_once '../../controlador/errores/errores.php';
 
-verificarSesion();
-
+// verificarSesion();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     function procesarFormularioQR()
@@ -17,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nombre_cientifico = $_POST['nombre_cientifico'];
         $descripcion = $_POST['descripcion'];
         $es_mamifero = isset($_POST['es_mamifero']) ? 1 : 0;
+        $usuario_id = $_POST['usuario_id'];
+
+       
 
         if (empty($nombre_comun)) {
             $errores[] = 'El nombre común es obligatorio.';

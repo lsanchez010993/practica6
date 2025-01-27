@@ -13,8 +13,8 @@
     <div class="contenidor">
         <?php
 
-        require_once __DIR__ . '/../../controlador/articuloController/manejarDatos.php';
-        require_once __DIR__ . '/../../vista/animal/funciones.php';
+        require_once __DIR__ . '/../../controlador/articuloController/vistaAnimalesController.php';
+        require_once __DIR__ . '/../../vista/animal/elementosVista.php';
         require_once __DIR__ . '../../../controlador/articuloController/mostrarAnimalesController.php';
         require_once __DIR__ . '../../../controlador/articuloController/buscarPorNombre.php';
         require_once __DIR__ . '../../../controlador/errores/errores.php';
@@ -26,6 +26,8 @@
 
         $totalArticulos = $animalesData['totalArticulos'];
         $pagina = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+
+     
         $articulosPorPagina = isset($_GET['posts_per_page']) ? (int) $_GET['posts_per_page'] : 6;
         $orden = $_GET['orden'] ?? 'nombre_asc';
         $administrar = (isset($_GET['administrar']) && $_GET['administrar'] === 'true');

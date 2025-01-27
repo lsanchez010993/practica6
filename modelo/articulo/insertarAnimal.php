@@ -60,7 +60,7 @@ function insertarAnimal($nombre_comun, $nombre_cientifico, $descripcion, $rutaIm
         return false;
     }
 }
-function insertarCopiaAnimal_QR($nombre_comun, $nombre_cientifico, $descripcion, $rutaImagen,  $es_mamifero)
+function insertarCopiaAnimal_QR($nombre_comun, $nombre_cientifico, $descripcion, $rutaImagen,  $usuario_id, $es_mamifero)
 {
     try {
         require_once __DIR__ . '/../conexion.php';

@@ -19,7 +19,7 @@ function verificarSesion()
             $_SESSION['login_time'] = time();
         }
     } else {
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit();
     }
 }

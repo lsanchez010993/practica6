@@ -1,3 +1,4 @@
+
 function mostrarModal(id) {
 
 
@@ -32,6 +33,7 @@ function regenerarQR(id) {
     const nombreCientifico = document.getElementById(`nombre-cientifico-${id}`).checked;
     const descripcion = document.getElementById(`descripcion-${id}`).checked;
     const rutaImagen = document.getElementById(`rutaImagen-${id}`).checked;
+    const usuario_ID = document.getElementById(`usuario_id-${id}`).checked;
 
 
  
@@ -40,7 +42,8 @@ function regenerarQR(id) {
         incluirNombreComun: nombreComun,
         incluirNombreCientifico: nombreCientifico,
         incluirDescripcion: descripcion,
-        incluirRutaImangen: rutaImagen
+        incluirRutaImangen: rutaImagen,
+        incluirUsuario_ID:usuario_ID
     };
 
 
