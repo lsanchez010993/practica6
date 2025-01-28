@@ -1,5 +1,5 @@
 <?php
-  if (session_status() === PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
@@ -23,10 +23,13 @@
 
     <!-- Títulos -->
     <?php if (!empty($animales)): ?>
-        
+
         <h1>
+
             <?php
-            if ($show_edit) {
+            //  var_dump($animalesCopiados);
+            //  exit();
+            if ($show_edit && !$animalesCopiados) {
                 echo "Mis fichas";
             } elseif ($animalesCopiados) {
                 echo "Animales copiados";
@@ -61,7 +64,7 @@
                             onclick="mostrarModal(<?php echo $animal['id']; ?>)" title="Ver QR" />
                     </div>
 
-                    <?php if ($show_edit): ?>
+                    <?php if ($show_edit && !$animalesCopiados): ?>
                         <a href="modelo/articulo/eliminarAnimal.php?id=<?php echo $animal['id']; ?>"
                             onclick="return confirmarEliminacion()">
                             <img src="vista/imagenes/iconos/eliminar.png"
@@ -72,6 +75,15 @@
                             <img src="vista/imagenes/iconos/editar.png"
                                 alt="Editar" width="20" height="20">
                         </a>
+                    <?php endif; ?>
+                    
+                    <!-- Si $show_edit && $animalesCopiados estan activos -->
+                    <?php if ($show_edit && $animalesCopiados): ?>
+                        <a href="modelo/articulo/eliminarAnimal.php?id=<?php echo $animal['id']; ?>&animalesCopiados=true"
+                            onclick="return confirmarEliminacion()">
+                            <img src="vista/imagenes/iconos/eliminar.png" alt="Eliminar" width="20" height="20">
+                        </a>
+
                     <?php endif; ?>
 
                     <div id="modal-data-<?php echo $animal['id']; ?>" style="display:none;">
@@ -94,7 +106,7 @@
                         <p>Selecciona los datos que quieres obtener con el QR</p><br>
 
 
-                        
+
                         <?php if (isset($_SESSION['usuario_id']) && !empty($_SESSION['usuario_id'])): ?>
                             <input type="checkbox" class="checkbox-qr" id="nombre-comun-<?php echo $animal['id']; ?>" checked>
                             <label for="nombre-comun-<?php echo $animal['id']; ?>">Nombre común</label><br>

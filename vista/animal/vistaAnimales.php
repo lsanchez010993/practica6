@@ -31,6 +31,9 @@
         $articulosPorPagina = isset($_GET['posts_per_page']) ? (int) $_GET['posts_per_page'] : 6;
         $orden = $_GET['orden'] ?? 'nombre_asc';
         $administrar = (isset($_GET['administrar']) && $_GET['administrar'] === 'true');
+        $animalesCopiados = (isset($_GET['animalesCopiados']) && $_GET['animalesCopiados'] === 'true');
+        $todosAnimales = (isset($_GET['todosAnimales']) && $_GET['todosAnimales'] === 'true');
+
 
 
 
@@ -59,9 +62,9 @@
             </ul>
         </section>
         <?php
-        mostrarPostsPerPageForm($pagina, $orden, $articulosPorPagina, $administrar);
+        mostrarPostsPerPageForm($pagina, $orden, $articulosPorPagina, $administrar, $animalesCopiados, $todosAnimales);
 
-        mostrarPaginacion($totalArticulos, $pagina, $articulosPorPagina, $orden, $administrar);
+        mostrarPaginacion($totalArticulos, $pagina, $articulosPorPagina, $orden, $administrar,$animalesCopiados, $todosAnimales);
         ?>
     </div>
     <script src="controlador/articuloController/ajax.js"></script>

@@ -1,8 +1,9 @@
 <?php
-require_once __DIR__ .'../../../controlador/articuloController/vistaAnimalesController.php';
+require_once __DIR__ . '../../../controlador/articuloController/vistaAnimalesController.php';
 
-function mostrarOrdenForm($pagina, $articulosPorPagina, $administrar = false, $orden = '') {
-    ?>
+function mostrarOrdenForm($pagina, $articulosPorPagina, $administrar = false, $orden = '')
+{
+?>
     <div class="desplegable_ordenacion">
         <form method="GET" action="">
             <label for="orden">Ordenar por:</label>
@@ -19,11 +20,12 @@ function mostrarOrdenForm($pagina, $articulosPorPagina, $administrar = false, $o
             <?php endif; ?>
         </form>
     </div>
-    <?php
+<?php
 }
 
-function mostrarPostsPerPageForm($pagina, $orden, $articulosPorPagina, $administrar = false) {
-    ?>
+function mostrarPostsPerPageForm($pagina, $orden, $articulosPorPagina, $administrar = false, $animalesCopiados = null, $todosAnimales = null)
+{
+?>
     <div class="desplegable_paginacion">
         <form method="GET" action="">
             <label for="posts_per_page">Artículos por página:</label>
@@ -37,11 +39,17 @@ function mostrarPostsPerPageForm($pagina, $orden, $articulosPorPagina, $administ
             <?php if ($administrar): ?>
                 <input type="hidden" name="administrar" value="true">
             <?php endif; ?>
+            <?php if ($animalesCopiados): ?>
+                <input type="hidden" name="animalesCopiados" value="true">
+            <?php endif; ?>
+            <?php if ($todosAnimales): ?>
+                <input type="hidden" name="todosAnimales" value="true">
+            <?php endif; ?>
         </form>
     </div>
-    <?php
+<?php
 }
-function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden, $administrar = false) 
+function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden, $administrar = false, $animalesCopiados, $todosAnimales = false)
 {
     require_once __DIR__ . '../../../modelo/articulo/contarAnimal.php';
 
@@ -58,18 +66,21 @@ function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden,
     if (isset($_GET['animalesCopiados'])) {
         $additionalParams .= '&animalesCopiados=' . urlencode($_GET['animalesCopiados']);
     }
-    
+
     // También mantienes otros parámetros que ya tenías
     $additionalParams .= '&posts_per_page=' . $articulosPorPagina;
     $additionalParams .= '&orden=' . urlencode($orden);
-    
-    if ($administrar) {
-        $additionalParams .= '&administrar=true';
+
+    if ($animalesCopiados) {
+        $additionalParams .= '&animalesCopiados=true';
     }
 
     // Agregar el parámetro "administrar" si es true
     if ($administrar) {
         $additionalParams .= '&administrar=true';
+    }
+    if ($todosAnimales) {
+        $additionalParams .= '&todosAnimales=true';
     }
 
     // Iniciar la paginación
@@ -104,11 +115,17 @@ function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden,
 }
 function mostrarBotones($user_id)
 {
+    if (isset($_SESSION['administrar'])) {
+        echo '<button class="boton_vista" onclick="location.href=\'index.php?administrar=true\'">Administrar articulos</button>';
+    }
     if ($user_id !== null) { // Corregido el operador de comparación
-        echo '<button class="boton_vista" onclick="location.href=\'index.php?todosAnimales=true\'">Todos los animales</button>';
+        if (!isset($_SESSION['administrar'])) {
+            echo '<button class="boton_vista" onclick="location.href=\'index.php?todosAnimales=true\'">Todos los animales</button>';
+        }
         echo '<button class="boton_vista" onclick="location.href=\'index.php\'">Mis animales</button>';
         echo '<button class="boton_vista" onclick="location.href=\'index.php?animalesCopiados=true\'">Animales copiados</button>';
     }
+
 }
 
 

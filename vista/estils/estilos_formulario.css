@@ -63,14 +63,28 @@ form input[type="email"] {
 
 /* Estilo de los botones */
 button {
-    width: 100%;
+    width: 30%;
     padding: 10px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 10px;
+    
 }
+button, .atras {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center; /* Centra el texto dentro del botón */
+    width: 20%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: auto; /* Mueve el botón a la derecha */
+}
+
 
 button[type="submit"] {
     background-color: #28a745;
@@ -78,6 +92,8 @@ button[type="submit"] {
 }
 
 button[type="button"] {
+    
+    padding: 8px 16px;
     background-color: #dc3545;
     color: white;
 }
@@ -96,4 +112,50 @@ button[type="button"]:hover {
 
 .correcto {
     color: green;
+}
+
+/* Contenedor que envuelve la tabla y el botón */
+.table-container {
+    position: relative;      /* Posiciona elementos hijos en relación a este contenedor */
+    width: 50%;             /* La tabla (y su contenedor) ocupará el 50% del ancho */
+    margin: 0 auto;         /* Centra el contenedor horizontalmente */
+}
+
+/* Ajustes para la tabla dentro del contenedor */
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    /* Si quieres margen inferior para evitar posible superposición, descomenta:
+    margin-bottom: 40px;
+    */
+}
+
+
+
+/* Resto de tus reglas existentes para la tabla */
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Si tenías reglas globales para button, revísalas para no pisar la posición absoluta */
+button, .atras {
+   
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+   
+   
+    
+    /* ... */
 }

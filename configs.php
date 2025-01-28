@@ -10,8 +10,7 @@
 // define("ID_GITHUB","Ov23liJDh5AJQjacuTfs");
 // define("kEY_SECRET_GITHUB","737a0c072a32a00061c594e882ec9369d15566aa");
 // define ("ENLACE_RECUPERACION_PASS", "http://luissanchez.cat/vista/usuaris/cambiarContrasenya.php?token=");
-// define("URL_QR", "http://luissanchez.cat/vista/animal/mostrarQR.php?id=");
-// define("URL_QR", "http://luissanchez.cat/vista/animal/insertarAnimal_QR.php");
+// define("URL_QR", "http://luissanchez.cat/vista/animal/");
 
 ?>
 

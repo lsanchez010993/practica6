@@ -35,7 +35,7 @@ function listarArticulosController($animales = null, $show_edit)
 
 
         // generar la URL para el QR
-        $qrURL  = URL_QR . 'mostrarQR.php/?id='.$animal['id'];
+        $qrURL  = URL_QR . 'vistaQR.php/?id='.$animal['id'];
         $qr = (new QRCode)->render($qrURL);
         $animales[$i]['qr'] = $qr;
     }

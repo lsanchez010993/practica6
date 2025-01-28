@@ -1,5 +1,5 @@
 <?php
-// mostrarQR.php
+// vistaQR.php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -22,6 +22,8 @@ if (isset($_POST['id'])) {
 } elseif (isset($_GET['id'])) {
     $id = (int)$_GET['id'];
 }
+// var_dump($id);
+// exit();
 
 // Si no tenemos un ID válido, terminamos
 if ($id <= 0) {
@@ -34,7 +36,6 @@ $correcto = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     list($errores, $correcto) = procesarFormularioQR();
- 
 }
 
 $animal = obtenerAnimalPor_Id($id);
@@ -45,6 +46,7 @@ if (!$animal) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,45 +58,51 @@ if (!$animal) {
         }
     </script>
 </head>
+
 <body>
     <!-- 4) Incluimos hidden input con 'id' para conservar su valor al enviar el formulario. -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data" onsubmit="return confirmarCreacion();">
-    <!-- Campo oculto para usuario_id -->
-    <input type="hidden" name="usuario_id" value="<?php echo htmlspecialchars($usuario_id); ?>">
-    <input type="hidden" name="id" value="<?php echo $id; ?>">
+        <!-- Campo oculto para usuario_id -->
+        <input type="hidden" name="usuario_id" value="<?php echo htmlspecialchars($usuario_id); ?>">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
 
-    <img src="<?php echo htmlspecialchars('../../' . $animal['ruta_imagen']); ?>" width="150" height="100">
-    
-    <label for="nombre_comun">Nombre Común:</label>
-    <input type="text" name="nombre_comun" id="nombre_comun" value="<?php echo htmlspecialchars($animal['nombre_comun']); ?>"><br>
+        <!-- Ejemplo de lo que podrías usar si realmente necesitas enviar la ruta -->
+        <input type="hidden" name="ruta_imagen" value="<?php echo htmlspecialchars($animal['ruta_imagen']); ?>">
 
-    <label for="nombre_cientifico">Nombre Científico:</label>
-    <input type="text" name="nombre_cientifico" id="nombre_cientifico" value="<?php echo htmlspecialchars($animal['nombre_cientifico']); ?>"><br>
+        <img src="<?php echo htmlspecialchars('../../' . $animal['ruta_imagen']); ?>" width="150" height="100">
 
-    <label for="descripcion">Descripción:</label>
-    <textarea name="descripcion" id="descripcion"><?php echo htmlspecialchars($animal['descripcion']); ?></textarea><br>
+        <label for="nombre_comun">Nombre Común:</label>
+        <input type="text" name="nombre_comun" id="nombre_comun" value="<?php echo htmlspecialchars($animal['nombre_comun']); ?>"><br>
 
-    <label for="mamifero">Mamífero</label>
-    <input type="radio" name="es_mamifero" id="mamifero" value="1" <?php echo ($animal['es_mamifero'] === '1') ? 'checked' : ''; ?>>
-    <label for="ovipero">Ovípero</label>
-    <input type="radio" name="es_mamifero" id="ovipero" value="0" <?php echo ($animal['es_mamifero'] === '0') ? 'checked' : ''; ?>><br><br>
+        <label for="nombre_cientifico">Nombre Científico:</label>
+        <input type="text" name="nombre_cientifico" id="nombre_cientifico" value="<?php echo htmlspecialchars($animal['nombre_cientifico']); ?>"><br>
 
-    <!-- Botón según si el usuario está logueado -->
+        <label for="descripcion">Descripción:</label>
+        <textarea name="descripcion" id="descripcion"><?php echo htmlspecialchars($animal['descripcion']); ?></textarea><br>
+
+        <label for="mamifero">Mamífero</label>
+        <input type="radio" name="es_mamifero" id="mamifero" value="1" <?php echo ($animal['es_mamifero'] === '1') ? 'checked' : ''; ?>>
+        <label for="ovipero">Ovípero</label>
+        <input type="radio" name="es_mamifero" id="ovipero" value="0" <?php echo ($animal['es_mamifero'] === '0') ? 'checked' : ''; ?>><br><br>
+
+       
+        <?php
+        if ($usuario_id !== null) {
+          
+            echo '<button class="iniciarSesion" type="submit">Clic para copiarlo en tu perfil</button>';
+        } else {
+           
+            echo "<button class='iniciarSesion' type='button' onclick=\"location.href='../../../vista/usuaris/inicioSesion.form.php'\">Inicia sesión para guardar el animal</button>";
+        }
+        ?>
+
+        <!-- Botón para volver a index-->
+        <button type="button" onclick="location.href='../../../index.php'">Página principal</button>
+
+    </form>
+
     <?php
-    if ($usuario_id !== null) {
-        echo '<button class="iniciarSesion" type="submit">Clic para copiarlo en tu perfil</button>';
-    } else  echo "<button class='iniciarSesion' onclick=\"location.href='../../../vista/usuaris/inicioSesion.form.php'\">Inicia sesión para guardar el animal</button>";
-   
-   
-    ?>
 
-    <!-- Botón para volver -->
-    <button type="button" onclick="location.href='../../../index.php'">Página principal</button>
-    
-</form>
-
-<?php
-    
     // Mostrar errores si existen
     if (!empty($errores)) {
         echo '<div class="error">';
@@ -103,11 +111,12 @@ if (!$animal) {
         }
         echo '</div>';
     }
-    
+
     // Mostrar mensaje de éxito si existe
     if (!empty($correcto)) {
         echo '<div class="correcto">' . htmlspecialchars($correcto) . '</div>';
     }
     ?>
 </body>
+
 </html>

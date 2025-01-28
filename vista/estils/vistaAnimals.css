@@ -51,23 +51,12 @@ h2 {
     margin: auto;
 }
 
-/* .contenidor .articles {
-    margin-bottom: 20px;
-}
-
-.contenidor .articles ul {
-    list-style: none;
-}
-
-.contenidor .articles ul li {
-    padding: 15px 10px;
-    border-bottom: 1px solid #c8c8c8;
-} */
 
 /* Estilos para la paginación */
 .paginacio {
     text-align: center;
     margin-top: 20px;
+    border-radius: 5px;
 }
 
 .paginacio ul {
@@ -75,15 +64,18 @@ h2 {
     list-style: none;
     padding: 0;
     margin: 0;
+    border-radius: 5px;
 }
 
 .paginacio ul li {
     display: inline-block;
     margin-right: 10px;
+    border-radius: 5px;
 }
 
 .paginacio ul li:last-child {
     margin-right: 0;
+    border-radius: 5px;
 }
 
 .paginacio ul .active a {
@@ -95,6 +87,7 @@ h2 {
     padding: 2px;
     cursor: not-allowed;
     color: #fff;
+    border-radius: 5px;
     text-decoration: none;
 }
 
@@ -102,6 +95,7 @@ h2 {
     display: inline-block;
     padding: 10px 20px;
     background: #424242;
+    border-radius: 5px;
     color: #fff;
     text-decoration: none;
     font-family: 'Open Sans Condensed', sans-serif;

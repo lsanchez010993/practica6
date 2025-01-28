@@ -48,7 +48,7 @@ $todosAnimales = isset($_GET['todosAnimales']) ? htmlspecialchars($_GET['todosAn
                 <?php $_SESSION['administrar'] = $administrar; ?>
                 <!-- Panel de Administración -->
                 <span class="panel_administrador">Panel de administración:</span>
-                <button onclick="location.href='controlador/userController/eliminarNombreSession.php?variable=nombre_variable'">Volver al indice</button>
+             
             <?php else: ?>
                 <!-- Mensaje de Bienvenida (no administración) -->
                 <div class="submenu">

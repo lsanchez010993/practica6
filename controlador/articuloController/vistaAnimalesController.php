@@ -45,7 +45,7 @@ function obtenerArticulosYTotal($params)
     }else{
         //sesion no inciada
         $totalArticulos = contarArticulos($params['user_id'], $params['animalesCopiados']);
-        var_dump($totalArticulos);
+        // var_dump($totalArticulos);
         $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden']);
         $show_edit = false;
     }
@@ -134,16 +134,3 @@ function iniciarSesionYObtenerParametros()
     ];
 }
 
-function mostrarArticulos($articlesData, $administrar)
-{
-    require_once __DIR__ . '../../../vista/animal/Mostrar.php';
-    $_SESSION['administrar'] = $administrar;
-    // Mostrar los artículos
-    if ($articlesData['show_edit']) {
-
-        listarArticulos($articlesData['articles'], 'editar');
-    } else {
-
-        listarArticulos($articlesData['articles']);
-    }
-}

@@ -33,7 +33,8 @@ function obtenerAnimalesCopiados($start, $articulosPorPagina, $columnaOrden, $di
         $stmt->bindParam(':limit', $articulosPorPagina, PDO::PARAM_INT);
         $stmt->execute();
       
-      
+    //   var_dump($stmt->fetchAll(PDO::FETCH_ASSOC));
+    //   exit();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         error_log("Error al obtener animales: " . $e->getMessage());
