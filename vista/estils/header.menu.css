@@ -3,7 +3,7 @@
 /* Alineación del menú a la derecha */
 .menu-right {
     margin-left: auto;
-    position: relative; /* Necesario para que el menú desplegable se posicione correctamente */
+    position: relative; 
 }
 
 /* Botón principal del menú */
@@ -21,7 +21,7 @@
 .menu-content {
     display: none;
     position: absolute;
-    top: 100%; /* Coloca el menú justo debajo del botón */
+    top: 100%; 
     right: 0;
 
     min-width: 160px;
@@ -68,17 +68,17 @@
 .submenu-content {
     display: none;
     position: absolute;
-    top: 0; /* Alinea el submenú con el botón principal */
-    right: 100%; /* Abre el submenú hacia la izquierda */
+    top: 0; 
+    right: 100%; 
     
     min-width: 160px;
     z-index: 1;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
     border-radius: 4px;
-    margin-right: 5px; /* Añade un pequeño margen para separar del botón principal */
+    margin-right: 5px; 
 }
 
-/* Mostrar el submenú al pasar el ratón sobre "Administrar" */
+
 .submenu:hover .submenu-content {
     display: block;
 }
@@ -112,9 +112,9 @@ header {
 .panel_administrador {
     text-align: left; 
     font-size: 29px;
-    position: relative; /* o simplemente eliminar esta línea */
-    display: block; /* garantiza que ocupe todo el ancho disponible */
-    margin: 10px 0; /* añade separación respecto a otros elementos */
+    position: relative; 
+    display: block; 
+    margin: 10px 0; 
 }
 
 
@@ -128,7 +128,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 10;
-    position: relative; /* Importante para posicionamiento absoluto de la barra de búsqueda */
+    position: relative; 
 }
 
 /* Centrar la barra de búsqueda */

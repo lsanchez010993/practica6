@@ -1,13 +1,4 @@
-.contenedor-tarjetas {
-    display: flex;
-    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en varias filas */
-    justify-content: center; /* Centra las tarjetas dentro del contenedor */
-    gap: 20px; /* Espaciado entre las tarjetas */
-    margin: 20px auto; /* Centra el contenedor horizontalmente */
-    max-width: 1200px; /* Ancho máximo del contenedor */
-    padding: 0 10px; /* Espaciado interno para evitar cortes en los bordes */
-    box-sizing: border-box; /* Asegura que padding y borde se incluyan en el ancho */
-}
+
 .imagen_qr_modal{
     max-width: 50%; 
     height: auto
@@ -16,44 +7,7 @@
     max-width: 70%; 
     height: auto
 }
-.tarjeta {
-    flex: 1 1 calc(33.333% - 40px); /* Tres tarjetas por fila */
-    max-width: 400px; /* Ancho máximo fijo */
-    text-align: center;
-    background-color: #f9f9f9;
-    padding: 15px;
-    margin: 10px; /* Espaciado externo */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    transition: transform 0.2s ease-in-out; /* Animación */
-    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
-}
 
-.tarjeta:hover {
-    transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
-}
-
-.tarjeta-imagen {
-    width: 100%; /* Imagen ocupa todo el ancho */
-    height: 250px; /* Altura fija */
-    object-fit: cover; /* Mantiene la proporción de la imagen */
-    overflow: hidden;
-    border-radius: 5px; /* Bordes redondeados */
-    margin-bottom: 15px; /* Espaciado entre imagen y contenido */
-}
-
-@media (max-width: 768px) {
-    .tarjeta {
-        flex: 1 1 calc(50% - 40px); /* Dos tarjetas por fila en pantallas medianas */
-    }
-}
-
-@media (max-width: 480px) {
-    .tarjeta {
-        flex: 1 1 100%; /* Una tarjeta por fila en pantallas pequeñas */
-    }
-}
 
 .qr-icon {
     margin-top: 0.5rem;
