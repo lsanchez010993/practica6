@@ -27,8 +27,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <h1>
 
             <?php
-            //  var_dump($animalesCopiados);
-            //  exit();
+            
             if ($show_edit && !$animalesCopiados) {
                 echo "Mis fichas";
             } elseif ($animalesCopiados) {

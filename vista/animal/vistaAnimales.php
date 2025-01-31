@@ -6,6 +6,7 @@
     <title>Menú principal</title>
 
     <link rel="stylesheet" href="vista/estils/vistaAnimals.css">
+    <link rel="stylesheet" href="vista/estils/mostrarAnimales.css">
 </head>
 
 <body>
@@ -33,6 +34,10 @@
         $administrar = (isset($_GET['administrar']) && $_GET['administrar'] === 'true');
         $animalesCopiados = (isset($_GET['animalesCopiados']) && $_GET['animalesCopiados'] === 'true');
         $todosAnimales = (isset($_GET['todosAnimales']) && $_GET['todosAnimales'] === 'true');
+        $animalesAPI= (isset($_GET['animalesAPI']) && $_GET['animalesAPI'] === 'true');
+
+        // var_dump($animalesAPI);
+       
 
 
 
@@ -55,7 +60,19 @@
                 if (isset($resultadosBusqueda)) {
                     $animales = $resultadosBusqueda;
                 }
-                listarArticulosController($animales, $animalesData['show_edit'], $params['todosAnimales']);
+                if (isset($animalesAPI) && $animalesAPI){
+                    //   var_dump("Entra en animales API");
+                    // exit;
+
+                    require_once __DIR__ .'../../../controlador/articuloController/llamarAPIGatos.php';
+                    // listarArticulosController($data, $animalesData['show_edit'], $params['todosAnimales']);
+
+                }else{
+                    // var_dump("Entra en animales");
+                    // exit;
+                    listarArticulosController($animales, $animalesData['show_edit'], $params['todosAnimales']);
+
+                }
 
 
                 ?>

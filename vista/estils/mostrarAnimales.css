@@ -1,20 +1,68 @@
-
-.imagen_qr_modal{
-    max-width: 50%; 
-    height: auto
+.contenedor-tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
-.imagen_modal{
-    max-width: 70%; 
-    height: auto
+
+.imagen_qr_modal {
+    max-width: 50%;
+    height: auto;
 }
 
+.imagen_modal {
+    max-width: 70%;
+    height: auto;
+}
+
+.tarjeta {
+    flex: 1 1 calc(33.333% - 40px);
+    max-width: 400px;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+
+.tarjeta:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta-imagen {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .tarjeta {
+        flex: 1 1 calc(50% - 40px);
+    }
+}
+
+@media (max-width: 480px) {
+    .tarjeta {
+        flex: 1 1 100%;
+    }
+}
 
 .qr-icon {
     margin-top: 0.5rem;
     cursor: pointer;
 }
 
-/* Estilos del modal (básico) */
 .modal {
     display: none;
     position: fixed;
@@ -24,7 +72,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
@@ -47,6 +95,7 @@
 .close:hover {
     color: #000;
 }
+
 #insertarQR-modal {
     max-width: 100%;
     height: auto;

@@ -115,10 +115,13 @@ function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden,
 }
 function mostrarBotones($user_id)
 {
+    // Botón de "Administrar artículos" (solo si el usuario tiene permisos de administración)
     if (isset($_SESSION['administrar'])) {
-        echo '<button class="boton_vista" onclick="location.href=\'index.php?administrar=true\'">Administrar articulos</button>';
+        echo '<button class="boton_vista" onclick="location.href=\'index.php?administrar=true\'">Administrar artículos</button>';
     }
-    if ($user_id !== null) { // Corregido el operador de comparación
+
+    // Botones para usuarios autenticados
+    if ($user_id !== null) {
         if (!isset($_SESSION['administrar'])) {
             echo '<button class="boton_vista" onclick="location.href=\'index.php?todosAnimales=true\'">Todos los animales</button>';
         }
@@ -126,7 +129,14 @@ function mostrarBotones($user_id)
         echo '<button class="boton_vista" onclick="location.href=\'index.php?animalesCopiados=true\'">Animales copiados</button>';
     }
 
+    // Botón de "Animales API" (siempre visible)
+    echo '<button class="boton_vista" onclick="location.href=\'index.php?animalesAPI=true\'">Animales API</button>';
+    if ($user_id === null) {
+       
+        echo '<button class="boton_vista" onclick="location.href=\'index.php\'">Animales de la web</button>';
+    }
 }
+
 
 
 ?>

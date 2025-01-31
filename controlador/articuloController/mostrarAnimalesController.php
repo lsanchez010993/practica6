@@ -10,7 +10,7 @@ use chillerlan\QRCode\QRCode;
 
 function listarArticulosController($animales = null, $show_edit)
 {
-
+// var_dump("Los gatos se ven aqui");
 
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -24,7 +24,7 @@ function listarArticulosController($animales = null, $show_edit)
 
     $esAdmin = (isset($_SESSION['administrar']) && $nombre_usuario === 'admin');
     $prefijoRutaImagen = 'vista/';
-
+  
     foreach ($animales as $i => $animal) {
 
         if ($esAdmin) {
@@ -39,7 +39,7 @@ function listarArticulosController($animales = null, $show_edit)
         $qr = (new QRCode)->render($qrURL);
         $animales[$i]['qr'] = $qr;
     }
-
+   
 
     $datos = [
         'animales'          => $animales,

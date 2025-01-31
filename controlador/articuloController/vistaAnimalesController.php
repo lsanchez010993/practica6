@@ -3,16 +3,11 @@ require_once __DIR__ . '../../articuloController/ordenarPorTipo.php';
 require_once __DIR__ . '../../../modelo/conexion.php';
 require_once __DIR__ . '../../../modelo/articulo/contarAnimal.php';
 require_once __DIR__ . '../../../modelo/articulo/limit_animales_por_pagina.php';
+
 function obtenerArticulosYTotal($params)
 {
 
-
-
     $start = ($params['pagina'] - 1) * $params['articulosPorPagina'];
-
- 
-   
-
 
     if (!empty($params['is_admin']) && !empty($params['administrar'])) {
         // Admin en modo administrar: mostrar todos los artículos con opción de editar
