@@ -83,6 +83,9 @@ function iniciarSesionYObtenerParametros()
         $is_admin = false;
     }
 
+    $letra = (isset($_GET['letter']) && $_GET['letter'] === 'true');
+
+
     // Verificar si el parámetro 'administrar' está activado
     $administrar = (isset($_GET['administrar']) && $_GET['administrar'] === 'true');
 
@@ -125,7 +128,8 @@ function iniciarSesionYObtenerParametros()
         'pagina'           => $pagina,
         'orden'            => $orden,
         'todosAnimales'    => $todosAnimales,
-        'animalesCopiados' => $animalesCopiados
+        'animalesCopiados' => $animalesCopiados,
+        'letra'            => $letra
     ];
 }
 

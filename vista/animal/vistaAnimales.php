@@ -28,16 +28,23 @@
         $totalArticulos = $animalesData['totalArticulos'];
         $pagina = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
-     
+
         $articulosPorPagina = isset($_GET['posts_per_page']) ? (int) $_GET['posts_per_page'] : 6;
         $orden = $_GET['orden'] ?? 'nombre_asc';
         $administrar = (isset($_GET['administrar']) && $_GET['administrar'] === 'true');
         $animalesCopiados = (isset($_GET['animalesCopiados']) && $_GET['animalesCopiados'] === 'true');
         $todosAnimales = (isset($_GET['todosAnimales']) && $_GET['todosAnimales'] === 'true');
-        $animalesAPI= (isset($_GET['animalesAPI']) && $_GET['animalesAPI'] === 'true');
+        $animalesAPI = (isset($_GET['animalesAPI']) && $_GET['animalesAPI'] === 'true');
+
+
+        $letra = isset($_GET['letter']) ? $_GET['letter'] : null;
+        // var_dump($letra);
+        
+        // exit();
+
 
         // var_dump($animalesAPI);
-       
+
 
 
 
@@ -60,18 +67,26 @@
                 if (isset($resultadosBusqueda)) {
                     $animales = $resultadosBusqueda;
                 }
-                if (isset($animalesAPI) && $animalesAPI){
-                    //   var_dump("Entra en animales API");
-                    // exit;
+                if (isset($animalesAPI) && $animalesAPI) {
 
-                    require_once __DIR__ .'../../../controlador/articuloController/llamarAPIGatos.php';
-                    // listarArticulosController($data, $animalesData['show_edit'], $params['todosAnimales']);
+                    require_once __DIR__ . '../../../controlador/articuloController/apiGatosController.php';
+                    $controller = new CatController();
+                    $controller->showCatsByLetter();
+                    $data = $controller->getData(); // Acceder a los datos obtenidos
+                    // var_dump($letra);
+                    // exit();
+                    if ($letra){
+                        listarArticulosController($data, $animalesData['show_edit'], $params['todosAnimales']);
+                    }
+                    
+                    // $controller = new CatController();
+                    // $controller->showCatsByLetter(); 
 
-                }else{
+
+                } else {
                     // var_dump("Entra en animales");
                     // exit;
                     listarArticulosController($animales, $animalesData['show_edit'], $params['todosAnimales']);
-
                 }
 
 
@@ -81,7 +96,7 @@
         <?php
         mostrarPostsPerPageForm($pagina, $orden, $articulosPorPagina, $administrar, $animalesCopiados, $todosAnimales);
 
-        mostrarPaginacion($totalArticulos, $pagina, $articulosPorPagina, $orden, $administrar,$animalesCopiados, $todosAnimales);
+        mostrarPaginacion($totalArticulos, $pagina, $articulosPorPagina, $orden, $administrar, $animalesCopiados, $todosAnimales);
         ?>
     </div>
     <script src="controlador/articuloController/ajax.js"></script>

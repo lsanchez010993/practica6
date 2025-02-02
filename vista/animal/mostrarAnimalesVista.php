@@ -38,9 +38,31 @@ if (session_status() === PHP_SESSION_NONE) {
             ?>
         </h1>
 
-
+            
         <div class="contenedor-tarjetas">
             <?php foreach ($animales as $animal): ?>
+                <?php 
+                    //   var_dump("$animalesAPI");
+
+                     if ($animalesAPI) {
+                        echo "<div class='tarjeta'>";
+    
+                        echo "<h2><strong>Nombre común: </strong>" . htmlspecialchars($animal['name']) . "</h2>";
+                        echo "<h3><span>Nombre científico: </span>" . htmlspecialchars($animal['scientific_name'] ?? 'No disponible') . "</h3>";
+                        echo "<p><strong>Mamífero: </strong>" . htmlspecialchars((isset($animal['is_mammal']) && $animal['is_mammal'] == 1) ? 'Sí' : 'No') . "</p>";
+            
+                        if (!empty($animal['image_link'])) {
+                            echo "<img src='" . htmlspecialchars($animal['image_link']) . "' alt='Imagen del gato' class='tarjeta-imagen'>";
+                        }
+            
+                        echo "<p class='descripcion'>" . htmlspecialchars($animal['description'] ?? 'Sin descripción') . "</p>";
+            
+                        echo "<hr>";
+                        echo "</div>"; 
+                        continue;
+                    }
+                    
+                    ?>
                 <div class="tarjeta">
                     <?php if ($esAdmin && isset($animal['nombreUsuario'])): ?>
                         <h2><strong>Usuario: </strong><?php echo htmlspecialchars($animal['nombreUsuario']); ?></h2>
@@ -132,6 +154,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
                     </div>
                 </div>
+                
             <?php endforeach; ?>
         </div>
     <?php else: ?>

@@ -7,7 +7,11 @@ class CatView
      
         echo "<input type='hidden' name='animalesAPI' value='true'>";
 
-        echo "<label for='letter' style='margin-right: 10px;'>Elige una letra:</label>";
+   
+        echo "<div style='width: 100%; margin-bottom: 10px;'><label for='letter'>Elige una letra:</label></div>";
+
+
+
 
         foreach (range('A', 'Z') as $letter) {
             $isSelected = (isset($_GET['letter']) && strtoupper($_GET['letter']) === $letter);
@@ -21,32 +25,5 @@ class CatView
         echo "<hr>";
     }
 
-
-
-    public function generarGatos($data)
-    {
-        if (!empty($data)) {
-            echo "<div class='contenedor-tarjetas'>";
-            foreach ($data as $gato) {
-                echo "<div class='tarjeta'>";
-    
-                echo "<h2><strong>Nombre común: </strong>" . htmlspecialchars($gato['name']) . "</h2>";
-                echo "<h3><span>Nombre científico: </span>" . htmlspecialchars($gato['scientific_name'] ?? 'No disponible') . "</h3>";
-                echo "<p><strong>Mamífero: </strong>" . htmlspecialchars((isset($gato['is_mammal']) && $gato['is_mammal'] == 1) ? 'Sí' : 'No') . "</p>";
-    
-                if (!empty($gato['image_link'])) {
-                    echo "<img src='" . htmlspecialchars($gato['image_link']) . "' alt='Imagen del gato' class='tarjeta-imagen'>";
-                }
-    
-                echo "<p class='descripcion'>" . htmlspecialchars($gato['description'] ?? 'Sin descripción') . "</p>";
-    
-                echo "<hr>";
-                echo "</div>"; 
-            }
-            echo "</div>"; 
-        } else {
-            echo "<p>No se encontraron datos para la letra seleccionada.</p>";
-        }
-    }
     
 }
