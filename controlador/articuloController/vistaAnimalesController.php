@@ -6,45 +6,65 @@ require_once __DIR__ . '../../../modelo/articulo/limit_animales_por_pagina.php';
 
 function obtenerArticulosYTotal($params)
 {
-
     $start = ($params['pagina'] - 1) * $params['articulosPorPagina'];
 
-    if (!empty($params['is_admin']) && !empty($params['administrar'])) {
-        // Admin en modo administrar: mostrar todos los artículos con opción de editar
-        $totalArticulos = contarArticulos();
-        $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden']);
-        $show_edit = true;
-    } elseif (!empty($params['user_id']) && !$params['todosAnimales'] && !$params['animalesCopiados']) {
+    if ($params['animalesAPI']) {
+        require_once __DIR__ . '../../../controlador/articuloController/apiGatosController.php';
+        $controller = new CatController();
 
-        // var_dump("mis fichas");
+        $letter = (isset($_GET['letter']) && ctype_alpha($_GET['letter'])) ? strtoupper($_GET['letter']) : 'A';
 
-        // Usuario logueado (no admin o admin sin administrar): mostrar sus artículos
-        $totalArticulos = contarArticulos($params['user_id']);
-        $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden'], $params['user_id']);
-        $show_edit = true;
-    } elseif (!empty($params['user_id']) && $params['todosAnimales'] && !$params['animalesCopiados']) {
-        // var_dump("todos los animales");
+        // Cargamos los datos con la letra ya seleccionada
+        $controller->loadDataByLetter($letter);
 
 
-        $totalArticulos = contarArticulos();
-        $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden']);
+        // $controller->showCatsByLetter();
+        $numero = $controller->contarAnimalesAPI();
+        $totalArticulos = $numero;
+        // var_dump($params['animalesAPI']);
+        // exit();
+
+        $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], null,null,null, $params['animalesAPI']);
         $show_edit = false;
-    } elseif (!empty($params['user_id']) && !$params['todosAnimales'] && $params['animalesCopiados']) {
-        // echo "animales copiados";
+    } else {
 
 
-        $totalArticulos = contarAnimalesCopiados($params['user_id']);
-        // var_dump($totalArticulos);
-        $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden'], $params['user_id'], $params['animalesCopiados']);
-        $show_edit = true;
-    }else{
-        //sesion no inciada
-        $totalArticulos = contarArticulos($params['user_id'], $params['animalesCopiados']);
-        // var_dump($totalArticulos);
-        $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden']);
-        $show_edit = false;
+        if (!empty($params['is_admin']) && !empty($params['administrar'])) {
+            // Admin en modo administrar: mostrar todos los artículos con opción de editar
+            $totalArticulos = contarArticulos();
+            $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden']);
+            $show_edit = true;
+        } elseif (!empty($params['user_id']) && !$params['todosAnimales'] && !$params['animalesCopiados']) {
+
+            // var_dump("mis fichas");
+
+            // Usuario logueado (no admin o admin sin administrar): mostrar sus artículos
+            $totalArticulos = contarArticulos($params['user_id']);
+            $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden'], $params['user_id']);
+            $show_edit = true;
+        } elseif (!empty($params['user_id']) && $params['todosAnimales'] && !$params['animalesCopiados']) {
+            // var_dump("todos los animales");
+
+
+            $totalArticulos = contarArticulos();
+            $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden']);
+            $show_edit = false;
+        } elseif (!empty($params['user_id']) && !$params['todosAnimales'] && $params['animalesCopiados']) {
+            // echo "animales copiados";
+
+
+            $totalArticulos = contarAnimalesCopiados($params['user_id']);
+            // var_dump($totalArticulos);
+            $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden'], $params['user_id'], $params['animalesCopiados']);
+            $show_edit = true;
+        } else {
+            //sesion no inciada
+            $totalArticulos = contarArticulos($params['user_id'], $params['animalesCopiados']);
+            // var_dump($totalArticulos);
+            $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], $params['orden']);
+            $show_edit = false;
+        }
     }
-
 
     // Calcular el número total de páginas
     $totalPaginas = ceil($totalArticulos / $params['articulosPorPagina']);
@@ -98,14 +118,18 @@ function iniciarSesionYObtenerParametros()
         ? filter_var($_GET['animalesCopiados'], FILTER_VALIDATE_BOOLEAN)
         : false;
 
-    // Obtener el número de artículos por página (SIN usar cookies)
+    $animalesAPI = isset($_GET['animalesAPI'])
+        ? filter_var($_GET['animalesAPI'], FILTER_VALIDATE_BOOLEAN)
+        : false;
+
+    // Obtener el número de artículos por página 
     if (isset($_GET['posts_per_page'])) {
         $articulosPorPagina = (int)$_GET['posts_per_page'];
     } else {
         $articulosPorPagina = 6; // Valor por defecto de 6
     }
 
-    // Obtener la página actual (SIN usar cookies)
+    // Obtener la página actual 
     if (isset($_GET['page'])) {
         $pagina = (int)$_GET['page'];
     } else {
@@ -129,7 +153,7 @@ function iniciarSesionYObtenerParametros()
         'orden'            => $orden,
         'todosAnimales'    => $todosAnimales,
         'animalesCopiados' => $animalesCopiados,
-        'letra'            => $letra
+        'letra'            => $letra,
+        'animalesAPI'       => $animalesAPI
     ];
 }
-

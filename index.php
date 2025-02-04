@@ -87,6 +87,7 @@ $todosAnimales = isset($_GET['todosAnimales']) ? htmlspecialchars($_GET['todosAn
                                     <button onclick="location.href='controlador/userController/administrarUsuarios.php'">Administrar Usuarios</button>
                                     <button onclick="location.href='index.php?administrar=true'">Administrar Animales</button>
                                 </div>
+                                <button onclick="location.href='vista/animal/animalesNoPublicados.php'">Aprobar animales</button>
                             </div>
                         <?php endif; ?>
 

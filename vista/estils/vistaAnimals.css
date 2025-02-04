@@ -48,7 +48,8 @@ h2 {
 }
 
 .paginacio ul {
-    display: inline-block;
+    display: flex; /* Se cambia a flexbox para alinear los elementos en línea */
+    justify-content: center;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -67,12 +68,13 @@ h2 {
 }
 
 .paginacio ul .active a {
-    background: #2580b4;
+    background: #1a658c; 
+    color: #fff;
 }
 
 .paginacio ul .disabled {
-    background: #c2bfbf;
-    padding: 2px;
+    background: #555555; 
+    padding: 10px 20px;
     cursor: not-allowed;
     color: #fff;
     border-radius: 5px;
@@ -82,17 +84,18 @@ h2 {
 .paginacio ul li a {
     display: inline-block;
     padding: 10px 20px;
-    background: #424242;
+    background: #2d2d2d; 
     border-radius: 5px;
-    color: #fff;
+    color: #ffffff; 
     text-decoration: none;
     font-family: 'Open Sans Condensed', sans-serif;
     transition: background-color 0.3s ease;
 }
 
 .paginacio ul li a:hover {
-    background: #399228;
+    background: #1f7a1f; /* Verde oscuro para mejor contraste */
 }
+
 
 .nombre_comun {
     font-size: 20px;

@@ -7,7 +7,7 @@ function obtenerAnimalesPorID($start, $articulosPorPagina, $columnaOrden, $direc
     try {
         $pdo = connectarBD();
 
-        $sql = "SELECT * FROM animales WHERE usuario_id = :usuario_id ORDER BY $columnaOrden $direccionOrden LIMIT :start, :limit";
+        $sql = "SELECT * FROM animales WHERE publicado = 1 AND usuario_id = :usuario_id ORDER BY $columnaOrden $direccionOrden LIMIT :start, :limit";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
         $stmt->bindParam(':start', $start, PDO::PARAM_INT);
@@ -49,7 +49,7 @@ function obtenerTodosAnimales($start, $articulosPorPagina, $columnaOrden, $direc
 
         // Preparar la consulta con el orden especificado
 
-        $sql = "SELECT * FROM animales ORDER BY $columnaOrden $direccionOrden LIMIT :start, :limit";
+        $sql = "SELECT * FROM animales WHERE publicado = 1 ORDER BY $columnaOrden $direccionOrden LIMIT :start, :limit";
         $stmt = $pdo->prepare($sql);
 
         $stmt->bindParam(':start', $start, PDO::PARAM_INT);

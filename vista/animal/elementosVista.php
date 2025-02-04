@@ -23,7 +23,7 @@ function mostrarOrdenForm($pagina, $articulosPorPagina, $administrar = false, $o
 <?php
 }
 
-function mostrarPostsPerPageForm($pagina, $orden, $articulosPorPagina, $administrar = false, $animalesCopiados = null, $todosAnimales = null)
+function mostrarPostsPerPageForm($pagina, $orden, $articulosPorPagina, $administrar = false, $animalesCopiados = null, $todosAnimales = null, $animalesAPI = null, $letra = null)
 {
 ?>
     <div class="desplegable_paginacion">
@@ -45,6 +45,12 @@ function mostrarPostsPerPageForm($pagina, $orden, $articulosPorPagina, $administ
             <?php if ($todosAnimales): ?>
                 <input type="hidden" name="todosAnimales" value="true">
             <?php endif; ?>
+            <?php if ($animalesAPI): ?>
+                <input type="hidden" name="animalesAPI" value="true">
+                <input type="hidden" name="letter" value="<?php echo htmlspecialchars($letra); ?>">
+
+            <?php endif; ?>
+       
         </form>
     </div>
 <?php
@@ -66,6 +72,9 @@ function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden,
     if (isset($_GET['animalesCopiados'])) {
         $additionalParams .= '&animalesCopiados=' . urlencode($_GET['animalesCopiados']);
     }
+    if (isset($_GET['animalesAPI'])) {
+        $additionalParams .= '&animalesAPI=' . urlencode($_GET['animalesAPI']);
+    }
 
     // También mantienes otros parámetros que ya tenías
     $additionalParams .= '&posts_per_page=' . $articulosPorPagina;
@@ -74,6 +83,7 @@ function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden,
     if ($animalesCopiados) {
         $additionalParams .= '&animalesCopiados=true';
     }
+
 
     // Agregar el parámetro "administrar" si es true
     if ($administrar) {
@@ -113,6 +123,7 @@ function mostrarPaginacion($totalArticles, $pagina, $articulosPorPagina, $orden,
     echo '</ul>';
     echo '</section>';
 }
+
 function mostrarBotones($user_id)
 {
     // Botón de "Administrar artículos" (solo si el usuario tiene permisos de administración)
@@ -130,9 +141,10 @@ function mostrarBotones($user_id)
     }
 
     // Botón de "Animales API" (siempre visible)
-    echo '<button class="boton_vista" onclick="location.href=\'index.php?animalesAPI=true\'">Animales API</button>';
+    echo '<button class="boton_vista" onclick="location.href=\'index.php?animalesAPI=true&letter=a\'">Animales API</button>';
+
     if ($user_id === null) {
-       
+
         echo '<button class="boton_vista" onclick="location.href=\'index.php\'">Animales de la web</button>';
     }
 }

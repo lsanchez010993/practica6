@@ -60,7 +60,7 @@ if (!$animal) {
 </head>
 
 <body>
-    <!-- 4) Incluimos hidden input con 'id' para conservar su valor al enviar el formulario. -->
+   
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data" onsubmit="return confirmarCreacion();">
         <!-- Campo oculto para usuario_id -->
         <input type="hidden" name="usuario_id" value="<?php echo htmlspecialchars($usuario_id); ?>">

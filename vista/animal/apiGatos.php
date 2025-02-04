@@ -3,15 +3,12 @@ class CatView
 {
     public function renderSelectorLetras()
     {
-        echo "<form method='GET' action='' style='display: flex; flex-wrap: wrap; gap: 5px;'>";
+        // Se agregó 'margin-top: 60px;' al style del form
+        echo "<form method='GET' action='' style='display: flex; flex-wrap: wrap; gap: 5px; margin-top: 60px;'>";
      
         echo "<input type='hidden' name='animalesAPI' value='true'>";
 
-   
         echo "<div style='width: 100%; margin-bottom: 10px;'><label for='letter'>Elige una letra:</label></div>";
-
-
-
 
         foreach (range('A', 'Z') as $letter) {
             $isSelected = (isset($_GET['letter']) && strtoupper($_GET['letter']) === $letter);
@@ -24,6 +21,5 @@ class CatView
         echo "</form>";
         echo "<hr>";
     }
-
-    
 }
+?>

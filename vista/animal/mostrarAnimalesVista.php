@@ -27,42 +27,54 @@ if (session_status() === PHP_SESSION_NONE) {
         <h1>
 
             <?php
-            
+            $animalesAPI = isset($_GET['animalesAPI'])
+                ? filter_var($_GET['animalesAPI'], FILTER_VALIDATE_BOOLEAN)
+                : false;
+
             if ($show_edit && !$animalesCopiados) {
                 echo "Mis fichas";
             } elseif ($animalesCopiados) {
                 echo "Animales copiados";
-            } else {
-                echo "Todos los animales:";
-            }
+            } elseif ($animalesAPI) {
+                echo "Todos los gatos:";
+            } else  echo "Todos los animales:";
             ?>
         </h1>
+        <?php
+        if ($animalesAPI) {
+            require_once __DIR__ . '../../../controlador/articuloController/apiGatosController.php';
 
-            
+            $controller = new CatController();
+            // var_dump("a1ui");
+            $controller->showCatsByLetter();
+        }
+
+        ?>
+
         <div class="contenedor-tarjetas">
             <?php foreach ($animales as $animal): ?>
-                <?php 
-                    //   var_dump("$animalesAPI");
+                <?php
+                //   var_dump("$animalesAPI");
 
-                     if ($animalesAPI) {
-                        echo "<div class='tarjeta'>";
-    
-                        echo "<h2><strong>Nombre común: </strong>" . htmlspecialchars($animal['name']) . "</h2>";
-                        echo "<h3><span>Nombre científico: </span>" . htmlspecialchars($animal['scientific_name'] ?? 'No disponible') . "</h3>";
-                        echo "<p><strong>Mamífero: </strong>" . htmlspecialchars((isset($animal['is_mammal']) && $animal['is_mammal'] == 1) ? 'Sí' : 'No') . "</p>";
-            
-                        if (!empty($animal['image_link'])) {
-                            echo "<img src='" . htmlspecialchars($animal['image_link']) . "' alt='Imagen del gato' class='tarjeta-imagen'>";
-                        }
-            
-                        echo "<p class='descripcion'>" . htmlspecialchars($animal['description'] ?? 'Sin descripción') . "</p>";
-            
-                        echo "<hr>";
-                        echo "</div>"; 
-                        continue;
+                if ($animalesAPI) {
+                    echo "<div class='tarjeta'>";
+
+                    echo "<h2><strong>Nombre común: </strong>" . htmlspecialchars($animal['name']) . "</h2>";
+                    echo "<h3><span>Nombre científico: </span>" . htmlspecialchars($animal['scientific_name'] ?? 'No disponible') . "</h3>";
+                    echo "<p><strong>Mamífero: </strong>" . htmlspecialchars((isset($animal['is_mammal']) && $animal['is_mammal'] == 1) ? 'Sí' : 'No') . "</p>";
+
+                    if (!empty($animal['image_link'])) {
+                        echo "<img src='" . htmlspecialchars($animal['image_link']) . "' alt='Imagen del gato' class='tarjeta-imagen'>";
                     }
-                    
-                    ?>
+
+                    echo "<p class='descripcion'>" . htmlspecialchars($animal['description'] ?? 'Sin descripción') . "</p>";
+
+                    echo "<hr>";
+                    echo "</div>";
+                    continue;
+                }
+
+                ?>
                 <div class="tarjeta">
                     <?php if ($esAdmin && isset($animal['nombreUsuario'])): ?>
                         <h2><strong>Usuario: </strong><?php echo htmlspecialchars($animal['nombreUsuario']); ?></h2>
@@ -97,7 +109,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                 alt="Editar" width="20" height="20">
                         </a>
                     <?php endif; ?>
-                    
+
                     <!-- Si $show_edit && $animalesCopiados estan activos -->
                     <?php if ($show_edit && $animalesCopiados): ?>
                         <a href="modelo/articulo/eliminarAnimal.php?id=<?php echo $animal['id']; ?>&animalesCopiados=true"
@@ -154,7 +166,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
                     </div>
                 </div>
-                
+
             <?php endforeach; ?>
         </div>
     <?php else: ?>
