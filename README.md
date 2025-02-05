@@ -16,6 +16,15 @@ Desde el panel de administrador he incorporado una opcion para revisar los artic
 Para ello he añadido un campo booleano a la base de datos llamado 'publicado'.
 Solo los articulos publicados se muestran en la web.
 
+## Mejoras
+
+He añadido la autentificació social que por falta de tiempo no pude añadir en la anterior UF.
+
+
+
+## Usuario Administrador
+user: admin
+pass: !Q"W12qw
 
 
 
