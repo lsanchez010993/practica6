@@ -13,14 +13,20 @@ if (!isset($_SESSION['nombre_usuario'])) {
 $session_iniciada = isset($_SESSION['nombre_usuario']);
 $nombre = $session_iniciada ? $_SESSION['nombre_usuario'] : null;
 
+
 $administrar = false;
 
 // Verificar si el usuario es administrador
 if ($session_iniciada && $nombre === 'admin') {
     $administrar = isset($_GET['administrar']) && $_GET['administrar'] === 'true';
 }
+
 // $todosAnimales = isset($_GET['todosAnimales']) && $_GET['todosAnimales'] === '';
 $todosAnimales = isset($_GET['todosAnimales']) ? htmlspecialchars($_GET['todosAnimales']) : '';
+$animalesAPI = isset($_GET['animalesAPI']) ? htmlspecialchars($_GET['animalesAPI']) : '';
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -58,13 +64,14 @@ $todosAnimales = isset($_GET['todosAnimales']) ? htmlspecialchars($_GET['todosAn
         <?php endif; ?>
 
         <!-- Barra de búsqueda -->
+         <?php if (!$animalesAPI): ?>
         <div>
             <form class="search-bar" action="" method="GET" onsubmit="return false;">
                 <input type="text" name="nombre_comun" placeholder="Buscar animal..." autocomplete="on">
             </form>
 
         </div>
-
+        <?php endif; ?>
         <div class="menu menu-right">
             <?php if (!isset($resultadosBusqueda)): ?>
                 <!-- Menú principal -->

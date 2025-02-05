@@ -5,6 +5,8 @@ require_once '../../modelo/articulo/insertarAnimal.php';
 require_once '../../controlador/errores/errores.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    
+
     function procesarFormularioQR()
     {
         $usuario_id = $_SESSION['usuario_id'] ?? null;

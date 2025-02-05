@@ -3,7 +3,15 @@ require_once '../../controlador/userController/verificarSesion.php';
 require_once '../../controlador/articuloController/insertarAnimalQR_API.php';
 require_once '../../controlador/errores/errores.php';
 
-verificarSesion();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$usuario_id = null;
+
+// Verificar si el usuario ha iniciado sesión
+if (isset($_SESSION['usuario_id']) && !empty($_SESSION['usuario_id'])) {
+    $usuario_id = $_SESSION['usuario_id'];
+}
 
 // Decodificar los datos del QR desde la URL si existen
 $datosAnimal = json_decode($_GET['data'] ?? '', true);
@@ -76,12 +84,23 @@ if (!empty($correcto)) {
         <input type="radio" name="es_mamifero" id="mamifero" value="1" <?php echo $es_mamifero === '1' ? 'checked' : ''; ?>>
         <label for="ovipero">Ovípero</label>
         <input type="radio" name="es_mamifero" id="ovipero" value="0" <?php echo $es_mamifero === '0' ? 'checked' : ''; ?>>
+        <?php
+        if ($usuario_id !== null) {
+          
+            echo '<button class="iniciarSesion" type="submit">Clic para copiarlo en tu perfil</button>';
+        } else {
+           
+            echo "<button class='iniciarSesion' type='button' onclick=\"location.href='../../vista/usuaris/inicioSesion.form.php'\">Inicia sesión para guardar el animal</button>";
+        }
+        ?>
 
-        <button type="submit">Copiar ficha animal</button>
-        <button type="button" onclick="location.href='../../index.php'">Atrás</button>
+        <!-- Botón para volver a index-->
+        <button type="button" onclick="location.href='../../index.php'">Página principal</button>
+
     </form>
 
     <?php
+
     // Mostrar errores si existen
     if (!empty($errores)) {
         echo '<div class="error">';

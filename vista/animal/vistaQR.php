@@ -60,7 +60,7 @@ if (!$animal) {
 </head>
 
 <body>
-   
+
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data" onsubmit="return confirmarCreacion();">
         <!-- Campo oculto para usuario_id -->
         <input type="hidden" name="usuario_id" value="<?php echo htmlspecialchars($usuario_id); ?>">
@@ -69,7 +69,7 @@ if (!$animal) {
         <!-- Ejemplo de lo que podrías usar si realmente necesitas enviar la ruta -->
         <input type="hidden" name="ruta_imagen" value="<?php echo htmlspecialchars($animal['ruta_imagen']); ?>">
 
-        <img src="<?php echo htmlspecialchars('../../' . $animal['ruta_imagen']); ?>" width="150" height="100">
+        <img src="<?php echo htmlspecialchars('../../../' . $animal['ruta_imagen']); ?>" width="150" height="100">
 
         <label for="nombre_comun">Nombre Común:</label>
         <input type="text" name="nombre_comun" id="nombre_comun" value="<?php echo htmlspecialchars($animal['nombre_comun']); ?>"><br>
@@ -85,19 +85,19 @@ if (!$animal) {
         <label for="ovipero">Ovípero</label>
         <input type="radio" name="es_mamifero" id="ovipero" value="0" <?php echo ($animal['es_mamifero'] === '0') ? 'checked' : ''; ?>><br><br>
 
-       
+
         <?php
         if ($usuario_id !== null) {
-          
+
             echo '<button class="iniciarSesion" type="submit">Clic para copiarlo en tu perfil</button>';
         } else {
-           
-            echo "<button class='iniciarSesion' type='button' onclick=\"location.href='../../../vista/usuaris/inicioSesion.form.php'\">Inicia sesión para guardar el animal</button>";
+
+            echo "<button class='iniciarSesion' type='button' onclick=\"location.href='../../vista/usuaris/inicioSesion.form.php'\">Inicia sesión para guardar el animal</button>";
         }
         ?>
 
         <!-- Botón para volver a index-->
-        <button type="button" onclick="location.href='../../../index.php'">Página principal</button>
+        <button type="button" onclick="location.href='../../index.php'">Página principal</button>
 
     </form>
 
