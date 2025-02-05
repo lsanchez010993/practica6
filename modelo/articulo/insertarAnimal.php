@@ -65,7 +65,10 @@ function insertarCopiaAnimal_QR($nombre_comun, $nombre_cientifico, $descripcion,
     try {
         require_once __DIR__ . '/../conexion.php';
         $pdo = connectarBD();
-      
+        // var_dump($ruta_imagen);
+
+        // exit();
+        
 
         // Preparar la consulta SQL para insertar un nuevo registro en la tabla animales
         $sql = "INSERT INTO animales_copia (nombre_comun, nombre_cientifico, descripcion, ruta_imagen, usuario_id, es_mamifero) 

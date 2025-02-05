@@ -14,16 +14,14 @@ function obtenerArticulosYTotal($params)
 
         $letter = (isset($_GET['letter']) && ctype_alpha($_GET['letter'])) ? strtoupper($_GET['letter']) : 'A';
 
-        // Cargamos los datos con la letra ya seleccionada
+       
         $controller->loadDataByLetter($letter);
 
 
-        // $controller->showCatsByLetter();
+       
         $numero = $controller->contarAnimalesAPI();
         $totalArticulos = $numero;
-        // var_dump($params['animalesAPI']);
-        // exit();
-
+    
         $animales = obtenerAnimalesConOrden($start, $params['articulosPorPagina'], null,null,null, $params['animalesAPI']);
         $show_edit = false;
     } else {

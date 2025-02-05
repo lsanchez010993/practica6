@@ -54,25 +54,36 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="contenedor-tarjetas">
             <?php foreach ($animales as $animal): ?>
                 <?php
-                //   var_dump("$animalesAPI");
+                //   var_dump("animalesCopiados");
 
                 if ($animalesAPI) {
+                   
                     echo "<div class='tarjeta'>";
-
+                    
                     echo "<h2><strong>Nombre común: </strong>" . htmlspecialchars($animal['name']) . "</h2>";
                     echo "<h3><span>Nombre científico: </span>" . htmlspecialchars($animal['scientific_name'] ?? 'No disponible') . "</h3>";
-                    echo "<p><strong>Mamífero: </strong>" . htmlspecialchars((isset($animal['is_mammal']) && $animal['is_mammal'] == 1) ? 'Sí' : 'No') . "</p>";
-
+                    echo "<p><strong>Mamífero: </strong>" . (isset($animal['is_mammal']) && $animal['is_mammal'] == 1 ? 'Sí' : 'No') . "</p>";
+                
                     if (!empty($animal['image_link'])) {
-                        echo "<img src='" . htmlspecialchars($animal['image_link']) . "' alt='Imagen del gato' class='tarjeta-imagen'>";
+                        echo "<img src='" . htmlspecialchars($animal['image_link']) . "' alt='Imagen del animal' class='tarjeta-imagen'>";
                     }
-
+                
                     echo "<p class='descripcion'>" . htmlspecialchars($animal['description'] ?? 'Sin descripción') . "</p>";
-
+                
+                    // Corregido el bloque del código QR
+                    echo "<div class='qr-icon'>
+                            <img src='" . htmlspecialchars($animal["qrAPI"]) . "' 
+                                 alt='Código QR' width='150' height='150' 
+                                 onclick='mostrarModal(4)' 
+                                 title='Ver QR' />
+                          </div>";
+                
                     echo "<hr>";
                     echo "</div>";
                     continue;
                 }
+                
+                
 
                 ?>
                 <div class="tarjeta">
@@ -85,7 +96,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p><strong>Mamífero: </strong><?php echo htmlspecialchars(($animal['es_mamifero'] == 1) ? 'Sí' : 'No'); ?></p>
 
                     <?php if (!empty($animal['ruta_imagen'])): ?>
-                        <img src="<?php echo htmlspecialchars($prefijoRutaImagen . $animal['ruta_imagen']); ?>"
+                        <img src="<?php echo htmlspecialchars($animal['ruta_imagen']); ?>"
                             alt="Imagen del artículo" class="tarjeta-imagen">
                     <?php endif; ?>
 
@@ -131,7 +142,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <br>
                             <img class="imagen_modal"
                                 id="rutaImagen-<?php echo $animal['id']; ?>"
-                                src="<?php echo htmlspecialchars($prefijoRutaImagen . $animal['ruta_imagen']); ?>"
+                                src="<?php echo htmlspecialchars( $animal['ruta_imagen']); ?>"
                                 alt="Imagen del artículo">
                             <br>
                         <?php endif; ?>
@@ -139,17 +150,22 @@ if (session_status() === PHP_SESSION_NONE) {
                         <p>Selecciona los datos que quieres obtener con el QR</p><br>
 
 
-
                         <?php if (isset($_SESSION['usuario_id']) && !empty($_SESSION['usuario_id'])): ?>
-                            <input type="checkbox" class="checkbox-qr" id="nombre-comun-<?php echo $animal['id']; ?>" checked>
-                            <label for="nombre-comun-<?php echo $animal['id']; ?>">Nombre común</label><br>
+                            <input type="checkbox" class="checkbox-qr" id="nombre-comun-<?php echo htmlspecialchars($animal['id']); ?>" checked>
+                            <label for="nombre-comun-<?php echo htmlspecialchars($animal['id']); ?>">Nombre común</label><br>
 
-                            <input type="checkbox" class="checkbox-qr" id="nombre-cientifico-<?php echo $animal['id']; ?>" checked>
-                            <label for="nombre-cientifico-<?php echo $animal['id']; ?>">Nombre científico</label><br>
+                            <input type="checkbox" class="checkbox-qr" id="nombre-cientifico-<?php echo htmlspecialchars($animal['id']); ?>" checked>
+                            <label for="nombre-cientifico-<?php echo htmlspecialchars($animal['id']); ?>">Nombre científico</label><br>
 
-                            <input type="checkbox" class="checkbox-qr" id="descripcion-<?php echo $animal['id']; ?>" checked>
-                            <label for="descripcion-<?php echo $animal['id']; ?>">Descripción</label><br>
+                            <input type="checkbox" class="checkbox-qr" id="descripcion-<?php echo htmlspecialchars($animal['id']); ?>" checked>
+                            <label for="descripcion-<?php echo htmlspecialchars($animal['id']); ?>">Descripción</label><br>
+
+                            <!-- Cambiamos el ID para que use el id del animal -->
+                            <input type="checkbox" class="checkbox-qr" id="usuario-<?php echo htmlspecialchars($animal['id']); ?>" checked>
+                            <label for="usuario-<?php echo htmlspecialchars($animal['id']); ?>">Usuario ID</label><br>
                         <?php endif; ?>
+
+
 
 
                         <br><br>

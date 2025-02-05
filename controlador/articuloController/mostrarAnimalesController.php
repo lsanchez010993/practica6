@@ -10,7 +10,8 @@ use chillerlan\QRCode\QRCode;
 
 function listarArticulosController($animales = null, $show_edit)
 {
-    // var_dump("Los gatos se ven aqui");
+
+
 
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
@@ -19,8 +20,23 @@ function listarArticulosController($animales = null, $show_edit)
         ? filter_var($_GET['animalesAPI'], FILTER_VALIDATE_BOOLEAN)
         : false;
 
+    // Asignar los datos filtrados a $animales y liberar la memoria de la versión original
+    if ($animalesAPI) {
+        
+        $animalesFiltrados = [];
+
+        foreach ($animales as $animal) {
+            $animalesFiltrados[] = [
+                'name' => $animal['name'] ?? 'No disponible',
+                'scientific_name' => $animal['scientific_name'] ?? 'No disponible',
+                'image_link' => $animal['image_link'] ?? 'Sin imagen'
+            ];
+        }
 
 
+        $animales = null;
+        $animales = $animalesFiltrados;
+    }
 
     $nombre_usuario = isset($_SESSION['nombre_usuario']) ? $_SESSION['nombre_usuario'] : null;
 
@@ -29,7 +45,7 @@ function listarArticulosController($animales = null, $show_edit)
         : false;
 
     $esAdmin = (isset($_SESSION['administrar']) && $nombre_usuario === 'admin');
-    $prefijoRutaImagen = 'vista/';
+    $prefijoRutaImagen = '';
 
     foreach ($animales as $i => $animal) {
 
@@ -41,12 +57,36 @@ function listarArticulosController($animales = null, $show_edit)
 
         if (!$animalesAPI) {
             // generar la URL para el QR
-            $qrURL  = URL_QR . 'vistaQR.php/?id='.$animal['id'];
+            $qrURL  = URL_QR . 'vistaQR.php/?id=' . $animal['id'];
             $qr = (new QRCode)->render($qrURL);
             $animales[$i]['qr'] = $qr;
+        } else {
+
+
+            $datosAnimal = [
+
+                'name' => $animal['name'] ?? 'No disponible',
+
+                'image_link' => $animal['image_link'] ?? 'Sin imagen'
+
+
+            ];
+
+
+            $jsonDatosAnimal = urlencode(json_encode($datosAnimal));
+
+
+            $qrURL = URL_QR . "insertarAnimalAPI_QR.php?data=$jsonDatosAnimal";
+
+
+            $qr = (new QRCode)->render($qrURL);
+
+            // Guardar el QR en el array del animal
+            $animales[$i]['qrAPI'] = $qr;
         }
     }
-
+    // var_dump($animales);
+    // exit();
 
     $datos = [
         'animales'          => $animales,

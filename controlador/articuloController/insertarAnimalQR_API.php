@@ -3,26 +3,28 @@
 require_once '../../controlador/userController/verificarSesion.php';
 require_once '../../modelo/articulo/insertarAnimal.php';
 require_once '../../controlador/errores/errores.php';
-
-// verificarSesion();
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     function procesarFormularioQR()
     {
-        $usuario_id = $_SESSION['usuario_id'];
-        $id = (int)$_POST['id'];
+        $usuario_id = $_SESSION['usuario_id'] ?? null;
+        
+        // Manejo seguro de variables para evitar warnings
+        $id = isset($_POST['id']) ? (int)$_POST['id'] : null;
+        $ruta_imagen = $_POST['ruta_imagen'] ?? 'ruta_por_defecto.jpg'; // Imagen por defecto
+
+        // var_dump($ruta_imagen);
+
+        // exit();
+        
+
+        $nombre_comun = $_POST['nombre_comun'] ?? 'Desconocido';
+        $nombre_cientifico = $_POST['nombre_cientifico'] ?? 'Desconocido';
+        $descripcion = $_POST['descripcion'] ?? 'Desconocido';
+        $es_mamifero = isset($_POST['es_mamifero']) ? 1 : 0;
+
         $errores = [];
         $correcto = '';
-        $ruta_imagen = $_POST['ruta_imagen'];
-        $nombre_comun = $_POST['nombre_comun'];
-        $nombre_cientifico = $_POST['nombre_cientifico'];
-        $descripcion = $_POST['descripcion'];
-        $es_mamifero = isset($_POST['es_mamifero']) ? 1 : 0;
-        $usuario_id = $_POST['usuario_id'];
-
 
         if (empty($nombre_comun)) {
             $errores[] = 'El nombre común es obligatorio.';
@@ -36,14 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errores[] = 'La descripción es obligatoria.';
         }
 
-
-
-
-
         if (empty($errores)) {
             require_once '../../modelo/articulo/insertarAnimal.php';
-            $usuario_id = $_SESSION['usuario_id'];
+            $usuario_id = $_SESSION['usuario_id'] ?? null;
 
+          
             $resultado = insertarCopiaAnimal_QR($nombre_comun, $nombre_cientifico, $descripcion, $ruta_imagen, $usuario_id, $es_mamifero);
 
             if ($resultado === true) {

@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if (move_uploaded_file($rutaTemporal, $rutaDestino)) {
                     // El archivo se ha subido correctamente, establecer la ruta
-                    $rutaImagenBD = 'imagenes/imagenes/' . $nombreArchivoSeguro;
+                    $rutaImagenBD = 'vista/imagenes/imagenes/' . $nombreArchivoSeguro;
                 }
             } else {
                 $errores[] = 'Tipo de archivo no permitido. Solo se permiten imágenes JPG, JPEG, PNG y GIF.';

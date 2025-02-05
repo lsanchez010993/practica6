@@ -5,7 +5,7 @@ class CatController
 {
     private $model;
     private $view;
-    private $data; // Propiedad para almacenar los datos
+    private $data; 
 
     public function __construct()
     {
@@ -19,7 +19,7 @@ class CatController
 
         if (isset($_GET['letter']) && ctype_alpha($_GET['letter'])) {
             $letter = strtoupper($_GET['letter']);
-            $this->data = $this->model->getCatData($letter); // Guardar en propiedad
+            $this->data = $this->model->getCatData($letter); 
 
 
         } else {
@@ -28,7 +28,7 @@ class CatController
     }
     public function loadDataByLetter($letter)
     {
-        // Asumimos que getCatData($letter) retorna un array de datos
+      
         $this->data = $this->model->getCatData($letter);
     }
 
@@ -44,23 +44,23 @@ class CatController
     public function obtenerAnimalesAPI($start, $articulosPorPagina, $columnaOrden, $direccionOrden)
     {
         try {
-            // Obtener los datos desde la API (se asume que getData() retorna un array)
+          
             $data = $this->getData();
             if (!is_array($data)) {
                 $data = [];
             }
 
-            // Validar y normalizar la dirección de ordenamiento
+           
             $direccionesPermitidas = ['ASC', 'DESC'];
             $direccionOrden = strtoupper($direccionOrden);
             if (!in_array($direccionOrden, $direccionesPermitidas)) {
                 $direccionOrden = 'ASC';
             }
 
-            // Si se indica una columna de ordenamiento, se ordena el array
+        
             if (!empty($columnaOrden)) {
                 usort($data, function ($a, $b) use ($columnaOrden, $direccionOrden) {
-                    // Si alguno de los elementos no tiene el índice indicado, se considera igual
+                   
                     if (!isset($a[$columnaOrden]) || !isset($b[$columnaOrden])) {
                         return 0;
                     }
@@ -75,7 +75,7 @@ class CatController
                 });
             }
 
-            // Realizar la paginación: extraer la porción del array según el offset y la cantidad solicitada
+           
             $paginatedData = array_slice($data, $start, $articulosPorPagina);
             return $paginatedData;
         } catch (\Exception $e) {
