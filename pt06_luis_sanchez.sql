@@ -46,14 +46,14 @@ CREATE TABLE `animales` (
 --
 
 INSERT INTO `animales` (`id`, `nombre_comun`, `nombre_cientifico`, `descripcion`, `ruta_imagen`, `usuario_id`, `fecha_insercion`, `es_mamifero`, `publicado`) VALUES
-(1, 'León', 'Panthera leo', 'El león es conocido como el rey de la selva.', 'imagenes/imagenes/leon.jpg', 1, '2024-10-28 15:02:47', 1, 1),
-(3, 'Águila Calva', 'Haliaeetus leucocephalus', 'El águila calva es el símbolo nacional de los Estados Unidos.', 'imagenes/imagenes/aguila_calva.jpg', 3, '2024-10-28 15:02:47', 0, 1),
-(4, 'Oso Polar', 'Ursus maritimus', 'El oso polar vive en el Ártico y es un mamífero carnívoro.', 'imagenes/imagenes/oso_polar.jpg', 1, '2024-10-28 15:02:47', 1, 1),
-(5, 'Pingüino Emperador', 'Aptenodytes forsteri', 'El pingüino emperador habita en la Antártida y es ovíparo.', 'imagenes/imagenes/pinguino.jpg', 1, '2024-10-28 15:02:47', 0, 1),
-(6, 'Elefante Africano', 'Loxodonta africana', 'El elefante africano es el mamífero terrestre más grande.', 'imagenes/imagenes/elefante.jpg', 3, '2024-10-28 15:02:47', 1, 1),
-(8, 'Canguro Rojo', 'Macropus rufus', 'El canguro rojo es el marsupial más grande del mundo.', 'imagenes/imagenes/canguro.jpg', 7, '2024-10-28 15:02:47', 1, 1),
-(9, 'Pato Mallard', 'Anas platyrhynchos', 'El pato mallard es un ave acuática común en el hemisferio norte.', 'imagenes/imagenes/pato.jpg', 7, '2024-10-28 15:02:47', 0, 1),
-(10, 'Gorila de Montaña', 'Gorilla beringei beringei', 'El gorila de montaña es un primate mamífero que vive en África.', 'imagenes/imagenes/gorila.jpg', 7, '2024-10-28 15:02:47', 1, 1);
+(1, 'León', 'Panthera leo', 'El león es conocido como el rey de la selva.', 'vista/imagenes/imagenes/leon.jpg', 1, '2024-10-28 15:02:47', 1, 1),
+(3, 'Águila Calva', 'Haliaeetus leucocephalus', 'El águila calva es el símbolo nacional de los Estados Unidos.', 'vista/imagenes/imagenes/aguila_calva.jpg', 3, '2024-10-28 15:02:47', 0, 1),
+(4, 'Oso Polar', 'Ursus maritimus', 'El oso polar vive en el Ártico y es un mamífero carnívoro.', 'vista/imagenes/imagenes/oso_polar.jpg', 1, '2024-10-28 15:02:47', 1, 1),
+(5, 'Pingüino Emperador', 'Aptenodytes forsteri', 'El pingüino emperador habita en la Antártida y es ovíparo.', 'vista/imagenes/imagenes/pinguino.jpg', 1, '2024-10-28 15:02:47', 0, 1),
+(6, 'Elefante Africano', 'Loxodonta africana', 'El elefante africano es el mamífero terrestre más grande.', 'vista/imagenes/imagenes/elefante.jpg', 3, '2024-10-28 15:02:47', 1, 1),
+(8, 'Canguro Rojo', 'Macropus rufus', 'El canguro rojo es el marsupial más grande del mundo.', 'vista/imagenes/imagenes/canguro.jpg', 7, '2024-10-28 15:02:47', 1, 1),
+(9, 'Pato Mallard', 'Anas platyrhynchos', 'El pato mallard es un ave acuática común en el hemisferio norte.', 'vista/imagenes/imagenes/pato.jpg', 7, '2024-10-28 15:02:47', 0, 1),
+(10, 'Gorila de Montaña', 'Gorilla beringei beringei', 'El gorila de montaña es un primate mamífero que vive en África.', 'vista/imagenes/imagenes/gorila.jpg', 7, '2024-10-28 15:02:47', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,7 @@ CREATE TABLE `animales_copia` (
 --
 
 INSERT INTO `animales_copia` (`id`, `nombre_comun`, `nombre_cientifico`, `descripcion`, `ruta_imagen`, `usuario_id`, `fecha_insercion`, `es_mamifero`) VALUES
-(15, 'Águila Calva', 'Haliaeetus leucocephalus', 'El águila calva es el símbolo nacional de los Estados Unidos.', 'imagenes/imagenes/aguila_calva.jpg', 7, '2025-01-27 18:20:49', 0);
+(15, 'Águila Calva', 'Haliaeetus leucocephalus', 'El águila calva es el símbolo nacional de los Estados Unidos.', 'vista/imagenes/imagenes/aguila_calva.jpg', 7, '2025-01-27 18:20:49', 0);
 
 -- --------------------------------------------------------
 

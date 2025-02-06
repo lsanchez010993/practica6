@@ -17,7 +17,7 @@
 
 <?php
 define("DB_HOST", "localhost"); // 'localhost' o la IP local
-define("DB_NAME", "pt05_luis_sanchez"); // Cambia si usas otra base de datos
+define("DB_NAME", "pt06_luis_sanchez"); // Cambia si usas otra base de datos
 define("DB_DSN", sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', DB_HOST, DB_NAME));
 define("DB_USER", "root"); // Usuario local típico de MySQL
 define("DB_PASSWORD", ""); // Deja vacío si no configuraste contraseña
